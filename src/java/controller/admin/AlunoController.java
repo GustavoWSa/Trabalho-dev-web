@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.AlunoDAO;
 
 @WebServlet(name = "AlunoController", urlPatterns = {"/admin/AlunoController"})
-public class AlunoControllerTodoErrado extends HttpServlet {
+public class AlunoController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

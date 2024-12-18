@@ -33,12 +33,18 @@ public class AlunoDAO {
     public void Inserir(Aluno Aluno) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO Alunos (nome, cpf, endereco, senha,)"
-                    + " VALUES (?,?,?,?)");
-            sql.setString(1, Administrador.getNome());
-            sql.setString(2, Administrador.getCpf());
-            sql.setString(3, Administrador.getEndereco());
-            sql.setString(4, Administrador.getSenha());
+            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO Alunos (id, nome, email, celular, cpf, senha, endereco, cidade, bairro, cep)"
+                    + " VALUES (?,?,?,?,?,?,?,?,?,?)");
+            sql.setInt(1, Aluno.getId());
+            sql.setString(2, Aluno.getNome());
+            sql.setString(3, Aluno.getEmail());
+            sql.setString(4, Aluno.getCelular());
+            sql.setString(5, Aluno.getCpf());
+            sql.setString(6, Aluno.getSenha());
+            sql.setString(7, Aluno.getEndereco());
+            sql.setString(8, Aluno.getCidade());
+            sql.setString(9, Aluno.getBairro());
+            sql.setString(10, Aluno.getCep());
             sql.executeUpdate();
 
         } catch (SQLException e) {
@@ -48,23 +54,28 @@ public class AlunoDAO {
         }
     }
 
-    public Administrador getAdministrador(int id) throws Exception {
+    public Aluno getAluno(int id) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            Administrador Administrador = new Administrador();
-            PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM Administrador WHERE ID = ? ");
+            Aluno Aluno = new Aluno();
+            PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM Alunos WHERE ID = ? ");
             sql.setInt(1, id);
             ResultSet resultado = sql.executeQuery();
             if (resultado != null) {
                 while (resultado.next()) {
-                    Administrador.setId(Integer.parseInt(resultado.getString("ID")));
-                    Administrador.setNome(resultado.getString("NOME"));
-                    Administrador.setCpf(resultado.getString("CPF"));
-                    Administrador.setEndereco(resultado.getString("ENDERECO"));
-                    Administrador.setSenha(resultado.getString("SENHA"));
+                    Aluno.setId(Integer.parseInt(resultado.getString("ID")));
+                    Aluno.setNome(resultado.getString("NOME"));
+                    Aluno.setEmail(resultado.getString("EMAIL"));
+                    Aluno.setCelular(resultado.getString("CELULAR"));
+                    Aluno.setCpf(resultado.getString("CPF"));
+                    Aluno.setSenha(resultado.getString("SENHA"));
+                    Aluno.setEndereco(resultado.getString("ENDERECO"));
+                    Aluno.setCidade(resultado.getString("CIDADE"));
+                    Aluno.setBairro(resultado.getString("BAIRRO"));
+                    Aluno.setCep(resultado.getString("CEP"));
                 }
             }
-            return Administrador;
+            return Aluno;
 
         } catch (SQLException e) {
             throw new RuntimeException("Query de select (get) incorreta");
@@ -73,15 +84,19 @@ public class AlunoDAO {
         }
     }
 
-    public void Alterar(Administrador Administrador) throws Exception {
+    public void Alterar(Aluno Aluno) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE Administrador SET nome = ?, cpf = ?, endereco = ?, senha = ?  WHERE ID = ? ");
-            sql.setString(1, Administrador.getNome());
-            sql.setString(2, Administrador.getCpf());
-            sql.setString(3, Administrador.getEndereco());
-            sql.setString(4, Administrador.getSenha());
-            sql.setInt(5, Administrador.getId());
+            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE Alunos SET nome = ?, email = ?, celular = ?, cpf = ?, senha = ?, endereco = ?, cidade = ?, bairro = ?, cep = ?  WHERE ID = ? ");
+            sql.setString(1, Aluno.getNome());
+            sql.setString(2, Aluno.getEmail());
+            sql.setString(3, Aluno.getCelular());
+            sql.setString(4, Aluno.getCpf());
+            sql.setString(5, Aluno.getSenha());
+            sql.setString(6, Aluno.getEndereco());
+            sql.setString(7, Aluno.getCidade());
+            sql.setString(8, Aluno.getBairro());
+            sql.setString(9, Aluno.getCep());
             sql.executeUpdate();
 
         } catch (SQLException e) {
@@ -91,11 +106,11 @@ public class AlunoDAO {
         }
     }
 
-    public void Excluir(Administrador Administrador) throws Exception {
+    public void Excluir(Aluno Aluno) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("DELETE FROM Administrador WHERE ID = ? ");
-            sql.setInt(1, Administrador.getId());
+            PreparedStatement sql = conexao.getConexao().prepareStatement("DELETE FROM Aluno WHERE ID = ? ");
+            sql.setInt(1, Aluno.getId());
             sql.executeUpdate();
 
         } catch (SQLException e) {
@@ -105,50 +120,55 @@ public class AlunoDAO {
         }
     }
 
-    public ArrayList<Administrador> ListaDeAdministrador() {
-        ArrayList<Administrador> meusAdministradores = new ArrayList();
+    public ArrayList<Aluno> ListaDeAlunos() {
+        ArrayList<Aluno> meusAlunos = new ArrayList();
         Conexao conexao = new Conexao();
         try {
-            String selectSQL = "SELECT * FROM Administrador order by nome";
+            String selectSQL = "SELECT * FROM Aluno order by nome";
             PreparedStatement preparedStatement;
             preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
             ResultSet resultado = preparedStatement.executeQuery();
             if (resultado != null) {
                 while (resultado.next()) {
-                    Administrador Administrador = new Administrador(resultado.getString("NOME"),
+                    Aluno Aluno = new Aluno(resultado.getString("NOME"),
+                            resultado.getString("EMAIL"),
+                            resultado.getString("CELULAR"),
                             resultado.getString("CPF"),
+                            resultado.getString("SENHA"),
                             resultado.getString("ENDERECO"),
-                            resultado.getString("SENHA"));
-                    Administrador.setId(Integer.parseInt(resultado.getString("id")));
-                    meusAdministradores.add(Administrador);
+                            resultado.getString("CIDADE"),
+                            resultado.getString("BAIRRO"),
+                            resultado.getString("CEP"));
+                    Aluno.setId(Integer.parseInt(resultado.getString("id")));
+                    meusAlunos.add(Aluno);
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Query de select (ListaDeAdministradores) incorreta");
+            throw new RuntimeException("Query de select (ListaDeAlunos) incorreta");
         } finally {
             conexao.closeConexao();
         }
-        return meusAdministradores;
+        return meusAlunos;
     }
 
-    public Administrador Logar(Administrador Administrador) throws Exception {
+    public Aluno Logar(Aluno Aluno) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM Administrador WHERE cpf=? and senha =? LIMIT 1");
-            sql.setString(1, Administrador.getCpf());
-            sql.setString(2, Administrador.getSenha());
+            PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM Alunos WHERE cpf=? and senha =? LIMIT 1");
+            sql.setString(1, Aluno.getCpf());
+            sql.setString(2, Aluno.getSenha());
             ResultSet resultado = sql.executeQuery();
-            Administrador AdministradorObtido = new Administrador();
+            Aluno AlunoObtido = new Aluno();
             if (resultado != null) {
                 while (resultado.next()) {
-                    AdministradorObtido.setId(Integer.parseInt(resultado.getString("ID")));
-                    AdministradorObtido.setNome(resultado.getString("NOME"));
-                    AdministradorObtido.setCpf(resultado.getString("CPF"));
-                    AdministradorObtido.setEndereco(resultado.getString("ENDERECO"));
-                    AdministradorObtido.setSenha(resultado.getString("SENHA"));
+                    AlunoObtido.setId(Integer.parseInt(resultado.getString("ID")));
+                    AlunoObtido.setNome(resultado.getString("NOME"));
+                    AlunoObtido.setCpf(resultado.getString("CPF"));
+                    AlunoObtido.setEndereco(resultado.getString("ENDERECO"));
+                    AlunoObtido.setSenha(resultado.getString("SENHA"));
                 }
             }
-            return AdministradorObtido;
+            return AlunoObtido;
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

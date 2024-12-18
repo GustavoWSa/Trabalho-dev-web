@@ -3,11 +3,24 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+     <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="#">
+        <title>Registrar aluno</title>
+        <link href="http://localhost:8080/aplicacaoMVC/views/bootstrap/bootstrap.min.css"  rel="stylesheet">
     </head>
     <body>
-        <h1>Hello World!</h1>
+         <div class="container">
+            <jsp:include page="../comum/menu.jsp" />
+            <div class="col-sm-6 offset-3 mt-5">
+
+                <h3>Registrar Aluno</h3>
+
+        </div>
+        </div>    
+        <script src="http://localhost:8080/aplicacaoMVC/views/bootstrap/bootstrap.bundle.min.js"></script>
+
     </body>
 </html>
