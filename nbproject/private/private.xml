@@ -3,31 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/comum/menu.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/admin/categoria/listaCategorias.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/admin/Disciplinas/listaDisciplinas.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/admin/CategoriaController.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/admin/RegistrarAluno.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/public/comentarios.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/model/ComentarioDAO.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/model/AdministradorDAO.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/HomeController.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/index.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/entidade/Aluno.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/admin/DashboardController.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/admin/dashboard/areaRestrita.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/AutenticaController.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/public/home.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/TrabalhoDevWeb.iml</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/registro/formRegistro.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/admin/Alunos/listaAlunos.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/RegistrarController.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/model/Conexao.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/admin/Alunos/formRegistrarAluno.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/autenticacao/formLogin.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/model/AlunoDAO.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/build/web/views/admin/categoria/listaCategorias.jsp</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/entidade/Professor.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/controller/admin/CategoriaController.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/controller/admin/ProfessorController.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/model/ProfessorDAO.java</file>
         </group>
     </open-files>
 </project-private>
