@@ -15,10 +15,11 @@
                         if (AdministradorLogado != null) { %>
                             <a class="nav-link" href="/aplicacaoMVC/admin/dashboard">Dashboard</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/CategoriaController?acao=Listar">Categorias</a>
+                            <a class="nav-link" href="/aplicacaoMVC/admin/RegistrarAluno">Registrar aluno</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/logOut">Logout</a>
                 <%  } else { %>
                 
-                            <a class="nav-link" href="/aplicacaoMVC/MostrarComentarios">Coment&aacute;rios</a>
+                            <a class="nav-link" href="/aplicacaoMVC/MostrarComentarios">Comentarios</a>
                             <a class="nav-link" href="/aplicacaoMVC/AutenticaController?acao=Login">Login</a>
                 <%    }
                     }%>
