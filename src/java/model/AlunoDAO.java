@@ -1,6 +1,7 @@
 package model;
 
 import entidade.Aluno;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -96,20 +97,31 @@ public class AlunoDAO implements Dao<Aluno> {
 
 
     @Override
-    public void update(Aluno t) {
+    public void update(Aluno aluno) {
         Conexao conexao = new Conexao();
-        try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE Alunos SET senha = ?  WHERE ID = ? ");
-            sql.setString(1, t.getSenha());
-            sql.setInt(2, t.getId());
-            sql.executeUpdate();
+        String sql = "UPDATE alunos SET nome = ?, email = ?, celular = ?, cpf = ?, senha = ?, endereco = ?, cidade = ?, bairro = ?, cep = ? WHERE id = ?";
 
+        try (Connection conn = conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, aluno.getNome());
+            stmt.setString(2, aluno.getEmail());
+            stmt.setString(3, aluno.getCelular());
+            stmt.setString(4, aluno.getCpf());
+            stmt.setString(5, aluno.getSenha());
+            stmt.setString(6, aluno.getEndereco());
+            stmt.setString(7, aluno.getCidade());
+            stmt.setString(8, aluno.getBairro());
+            stmt.setString(9, aluno.getCep());
+            stmt.setInt(10, aluno.getId());
+
+            stmt.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Query de update (alterar aluno) incorreta");
-        } finally {
-            conexao.closeConexao();
+            System.err.println("Erro ao atualizar aluno: " + e.getMessage());
         }
     }
+
+    
 
     @Override
     public void delete(int id) {
