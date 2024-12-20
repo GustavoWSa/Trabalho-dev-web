@@ -38,23 +38,33 @@ public class RegistrarAluno extends HttpServlet {
                 break;
 
             case "Alterar":
+                int idAlterar = Integer.parseInt(request.getParameter("id"));
+            try {
+            Aluno alunoParaAlterar = alunoDAO.get(idAlterar);
+            request.setAttribute("aluno", alunoParaAlterar);
+            request.setAttribute("acao", "Alterar");
+            request.setAttribute("msgError", "");
+            } catch (Exception e) {
+            System.out.println("Erro ao buscar aluno para alteração: " + e.getMessage());
+            request.setAttribute("msgError", "Falha ao carregar dados do aluno.");
+            }
+
+            RequestDispatcher rdAlterar = request.getRequestDispatcher("/views/admin/Alunos/formRegistrarAluno.jsp");
+            rdAlterar.forward(request, response);
+            break;
             case "Excluir":
                 // get parametro ação indicando sobre qual categoria será a ação
-                int id = Integer.parseInt(request.getParameter("id"));
-                try {
-                        aluno = alunoDAO.get(id); // Usa a instância do AlunoDAO para chamar o método get
-                    } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-                throw new RuntimeException("Falha ao buscar o aluno pelo ID");
-    }
-
-                request.setAttribute("aluno", aluno);
-                request.setAttribute("msgError", "");
-                request.setAttribute("acao", acao);
-
-                rd = request.getRequestDispatcher("/views/admin/categoria/formCategoria.jsp");
-                rd.forward(request, response);
-                break;
+                // Captura o ID do aluno a ser excluído
+            int id = Integer.parseInt(request.getParameter("id"));
+            try {
+                alunoDAO.delete(id); // Exclui o aluno do banco
+                request.setAttribute("msgOperacaoRealizada", "Aluno excluído com sucesso!");
+            } catch (Exception e) {
+                request.setAttribute("msgError", "Erro ao excluir o aluno: " + e.getMessage());
+            }
+            // Redireciona para a listagem após exclusão
+            response.sendRedirect("/aplicacaoMVC/admin/RegistrarAluno?acao=Listar");
+            break;
 
 
             case "Incluir":
@@ -70,9 +80,12 @@ public class RegistrarAluno extends HttpServlet {
 
     @Override
 protected void doPost(HttpServletRequest request, HttpServletResponse response) 
-    throws ServletException, IOException {
+        throws ServletException, IOException {
 
-    // Não precisamos mais do id aqui
+    // Captura o ID, caso exista (somente para Alterar ou Excluir)
+    String idParam = request.getParameter("id");
+    int id = (idParam != null && !idParam.isEmpty()) ? Integer.parseInt(idParam) : 0;
+
     String nome = request.getParameter("nome");
     String email = request.getParameter("email");
     String celular = request.getParameter("celular");
@@ -88,7 +101,6 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
 
     // Verifique se o nome está vazio
     if (nome == null || nome.isEmpty()) {
-        // Criar um novo objeto de aluno vazio
         Aluno aluno = new Aluno();
         request.setAttribute("aluno", aluno);
         request.setAttribute("acao", btEnviar);
@@ -96,22 +108,29 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         rd = request.getRequestDispatcher("/views/admin/Alunos/formRegistrarAluno.jsp");
         rd.forward(request, response);
     } else {
-        // Criação do aluno sem id
-        Aluno aluno = new Aluno(nome, email, celular, cpf, senha, endereco, cidade, bairro, cep);
+        Aluno aluno;
+        if (id > 0) {
+            // Criação do aluno com ID (para Alterar ou Excluir)
+            aluno = new Aluno(id, nome, email, celular, cpf, senha, endereco, cidade, bairro, cep);
+        } else {
+            // Criação do aluno sem ID (para Incluir)
+            aluno = new Aluno(nome, email, celular, cpf, senha, endereco, cidade, bairro, cep);
+        }
+
         AlunoDAO alunoDAO = new AlunoDAO();
 
         try {
             switch (btEnviar) {
                 case "Incluir":
-                    alunoDAO.insert(aluno); // O id será gerado automaticamente pelo banco
+                    alunoDAO.insert(aluno);
                     request.setAttribute("msgOperacaoRealizada", "Inclusão realizada com sucesso");
                     break;
                 case "Alterar":
-                    alunoDAO.update(aluno); // O aluno já tem o id (o id foi capturado na seleção)
+                    alunoDAO.update(aluno);
                     request.setAttribute("msgOperacaoRealizada", "Alteração realizada com sucesso");
                     break;
                 case "Excluir":
-                    alunoDAO.delete(aluno.getId()); // O id será passado para exclusão
+                    alunoDAO.delete(aluno.getId());
                     request.setAttribute("msgOperacaoRealizada", "Exclusão realizada com sucesso");
                     break;
             }
@@ -120,10 +139,9 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
             rd = request.getRequestDispatcher("/views/comum/showMessage.jsp");
             rd.forward(request, response);
 
-        } catch (IOException | ServletException ex) {
-            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
             throw new RuntimeException("Falha em uma query para cadastro de Aluno");
         }
     }
-}
-}
+}}
