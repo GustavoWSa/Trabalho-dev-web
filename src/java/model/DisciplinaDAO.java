@@ -1,68 +1,111 @@
 package model;
 
-import entidade.Disciplina;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
+import entidade.Disciplina;
 
-public class DisciplinaDAO {
-    private Connection connection;
+public class DisciplinaDAO implements Dao<Disciplina> {
 
-    public DisciplinaDAO(Connection connection) {
-        this.connection = connection;
+    @Override
+    public Disciplina get(int id) {
+        Conexao conexao = new Conexao();
+        Disciplina disciplina = new Disciplina();
+        try {
+            PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM disciplina WHERE id = ?");
+            sql.setInt(1, id);
+            ResultSet resultado = sql.executeQuery();
+
+            if (resultado != null && resultado.next()) {
+                disciplina.setId(resultado.getInt("id"));
+                disciplina.setNome(resultado.getString("nome"));
+                disciplina.setRequisito(resultado.getString("requisito"));
+                disciplina.setEmenta(resultado.getString("ementa"));
+                disciplina.setCargaHoraria(resultado.getInt("carga_horaria"));
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao obter disciplina: " + e.getMessage());
+        } finally {
+            conexao.closeConexao();
+        }
+        return disciplina;
     }
 
-    // CREATE
-    public void create(Disciplina disciplina) throws SQLException {
-        String sql = "INSERT INTO disciplina (nome, requisito, emetenta, cargaHoraria) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, disciplina.getNome());
-            stmt.setString(2, disciplina.getRequisito());
-            stmt.setString(3, disciplina.getEmetenta());
-            stmt.setInt(4, disciplina.getCargaHoraria());
-            stmt.executeUpdate();
+    @Override
+    public void insert(Disciplina t) {
+        Conexao conexao = new Conexao();
+        try {
+            String query = "INSERT INTO disciplina (nome, requisito, ementa, carga_horaria) VALUES (?, ?, ?, ?)";
+            PreparedStatement sql = conexao.getConexao().prepareStatement(query);
+            sql.setString(1, t.getNome());
+            sql.setString(2, t.getRequisito());
+            sql.setString(3, t.getEmenta());
+            sql.setInt(4, t.getCargaHoraria());
+            sql.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Erro ao inserir disciplina: " + e.getMessage());
+        } finally {
+            conexao.closeConexao();
         }
     }
 
-    // READ
-    public List<Disciplina> listAll() throws SQLException {
-        List<Disciplina> disciplinas = new ArrayList<>();
-        String sql = "SELECT * FROM disciplina";
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
+    @Override
+    public void update(Disciplina t) {
+        Conexao conexao = new Conexao();
+        try {
+            String query = "UPDATE disciplina SET nome = ?, requisito = ?, ementa = ?, carga_horaria = ? WHERE id = ?";
+            PreparedStatement sql = conexao.getConexao().prepareStatement(query);
+            sql.setString(1, t.getNome());
+            sql.setString(2, t.getRequisito());
+            sql.setString(3, t.getEmenta());
+            sql.setInt(4, t.getCargaHoraria());
+            sql.setInt(5, t.getId());
+            sql.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Erro ao atualizar disciplina: " + e.getMessage());
+        } finally {
+            conexao.closeConexao();
+        }
+    }
+
+    @Override
+    public void delete(int id) {
+        Conexao conexao = new Conexao();
+        try {
+            String query = "DELETE FROM disciplina WHERE id = ?";
+            PreparedStatement sql = conexao.getConexao().prepareStatement(query);
+            sql.setInt(1, id);
+            sql.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir disciplina: " + e.getMessage());
+        } finally {
+            conexao.closeConexao();
+        }
+    }
+
+    @Override
+    public ArrayList<Disciplina> getAll() {
+        ArrayList<Disciplina> disciplinas = new ArrayList<>();
+        Conexao conexao = new Conexao();
+        try {
+            String query = "SELECT * FROM disciplina";
+            PreparedStatement preparedStatement = conexao.getConexao().prepareStatement(query);
+            ResultSet resultado = preparedStatement.executeQuery();
+
+            while (resultado.next()) {
                 Disciplina disciplina = new Disciplina(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getString("requisito"),
-                    rs.getString("emetenta"),
-                    rs.getInt("cargaHoraria")
+                        resultado.getInt("id"),
+                        resultado.getString("nome"),
+                        resultado.getString("requisito"),
+                        resultado.getString("ementa"),
+                        resultado.getInt("carga_horaria")
                 );
                 disciplinas.add(disciplina);
             }
+        } catch (SQLException e) {
+            System.err.println("Erro ao listar disciplinas: " + e.getMessage());
+        } finally {
+            conexao.closeConexao();
         }
         return disciplinas;
-    }
-
-    // UPDATE
-    public void update(Disciplina disciplina) throws SQLException {
-        String sql = "UPDATE disciplina SET nome = ?, requisito = ?, emetenta = ?, cargaHoraria = ? WHERE id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, disciplina.getNome());
-            stmt.setString(2, disciplina.getRequisito());
-            stmt.setString(3, disciplina.getEmetenta());
-            stmt.setInt(4, disciplina.getCargaHoraria());
-            stmt.setInt(5, disciplina.getId());
-            stmt.executeUpdate();
-        }
-    }
-
-    // DELETE
-    public void delete(int id) throws SQLException {
-        String sql = "DELETE FROM disciplina WHERE id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-        }
     }
 }

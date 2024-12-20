@@ -1,24 +1,30 @@
 package entidade;
 
 public class Disciplina {
+
     private int id;
     private String nome;
     private String requisito;
-    private String emetenta;
+    private String ementa;
     private int cargaHoraria;
 
-    // Construtores
-    public Disciplina() {}
+    public Disciplina() {
+        this.id = 0;
+        this.nome = "";
+        this.requisito = "";
+        this.ementa = "";
+        this.cargaHoraria = 0;
+    }
 
-    public Disciplina(int id, String nome, String requisito, String emetenta, int cargaHoraria) {
+    public Disciplina(int id, String nome, String requisito, String ementa, int cargaHoraria) {
         this.id = id;
         this.nome = nome;
         this.requisito = requisito;
-        this.emetenta = emetenta;
+        this.ementa = ementa;
         this.cargaHoraria = cargaHoraria;
     }
 
-    // Getters e Setters
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -43,12 +49,12 @@ public class Disciplina {
         this.requisito = requisito;
     }
 
-    public String getEmetenta() {
-        return emetenta;
+    public String getEmenta() {
+        return ementa;
     }
 
-    public void setEmetenta(String emetenta) {
-        this.emetenta = emetenta;
+    public void setEmenta(String ementa) {
+        this.ementa = ementa;
     }
 
     public int getCargaHoraria() {

@@ -3,10 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/entidade/Professor.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/controller/admin/CategoriaController.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/controller/admin/ProfessorController.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/web/views/admin/Professor/formProfessor.jsp</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/entidade/Aluno.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/web/views/public/home.jsp</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/entidade/Categoria.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/web/views/admin/Professor/listaProfessor.jsp</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/web/views/comum/menu.jsp</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/model/DisciplinaDAO.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/web/views/admin/categoria/listaCategorias.jsp</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/model/ProfessorDAO.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/model/TurmaDAO.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/entidade/Turma.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/web/views/admin/Disciplinas/formDisciplina.jsp</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/model/CategoriaDAO.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/entidade/Professor.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/entidade/Disciplina.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/controller/admin/DisciplinaController.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/web/views/admin/Disciplinas/listaDisciplinas.jsp</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/web/views/admin/categoria/formCategoria.jsp</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/GitHub/Trabalho-dev-web/src/java/controller/admin/ProfessorController.java</file>
         </group>
     </open-files>
 </project-private>

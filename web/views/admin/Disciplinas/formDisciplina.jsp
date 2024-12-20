@@ -1,44 +1,75 @@
-<%@ include file="/views/comun/header.jsp" %>
-<div class="container mt-4">
-    <h1 class="text-center">${disciplina != null ? "Editar Disciplina" : "Cadastrar Disciplina"}</h1>
-    <form action="/disciplina" method="post" class="mt-4">
-        <!-- ID oculto para edição -->
-        <input type="hidden" name="id" value="${disciplina != null ? disciplina.id : ''}">
-        
-        <!-- Campo Nome -->
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="nome" name="nome" 
-                   value="${disciplina != null ? disciplina.nome : ''}" required>
-        </div>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entidade.Disciplina"%>
 
-        <!-- Campo Requisito -->
-        <div class="mb-3">
-            <label for="requisito" class="form-label">Requisito</label>
-            <input type="text" class="form-control" id="requisito" name="requisito" 
-                   value="${disciplina != null ? disciplina.requisito : ''}">
-        </div>
+<!DOCTYPE html>
+<html lang="pt-br">
 
-        <!-- Campo Ementa -->
-        <div class="mb-3">
-            <label for="ementa" class="form-label">Ementa</label>
-            <input type="text" class="form-control" id="ementa" name="ementa" 
-                   value="${disciplina != null ? disciplina.ementa : ''}">
-        </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="#">
+        <title>Disciplina</title>
+        <link href="http://localhost:8080/aplicacaoMVC/views/bootstrap/bootstrap.min.css"  rel="stylesheet">
+    </head>
 
-        <!-- Campo Carga Horária -->
-        <div class="mb-3">
-            <label for="cargaHoraria" class="form-label">Carga Horária</label>
-            <input type="number" class="form-control" id="cargaHoraria" name="cargaHoraria" 
-                   value="${disciplina != null ? disciplina.cargaHoraria : ''}" required>
-        </div>
+    <body>
 
-        <!-- Botão de Submissão -->
-        <div class="text-end">
-            <button type="submit" class="btn btn-success">
-                ${disciplina != null ? "Salvar Alterações" : "Cadastrar"}
-            </button>
+        <div class="container">
+            <jsp:include page="../../comum/menu.jsp" />
+            <div class="row mt-5">
+                <div class="col-sm-4 offset-3">
+                    <%
+                        Disciplina disciplina = (Disciplina) request.getAttribute("disciplina");
+                        String acao = (String) request.getAttribute("acao");
+                        switch (acao) {
+                            case "Incluir":
+                                out.println("<h1>Incluir Disciplina</h1>");
+                                break;
+                            case "Alterar":
+                                out.println("<h1>Alterar Disciplina</h1>");
+                                break;
+                            case "Excluir":
+                                out.println("<h1>Excluir Disciplina</h1>");
+                                break;
+                        }
+
+                        String msgError = (String) request.getAttribute("msgError");
+                        if ((msgError != null) && (!msgError.isEmpty())) {%>
+                    <div class="alert alert-danger" role="alert">
+                        <%= msgError%>
+                    </div>
+                    <% }%>
+
+                    <form action="/aplicacaoMVC/admin/DisciplinaController" method="POST">
+                        <input type="hidden" name="id" value="<%=disciplina.getId()%>" class="form-control">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" name="nome" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=disciplina.getNome()%>" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="requisito" class="form-label">Requisito</label>
+                            <input type="text" name="requisito" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=disciplina.getRequisito()%>" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ementa" class="form-label">Ementa</label>
+                            <input type="text" name="ementa" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=disciplina.getEmenta()%>" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="carga_horaria" class="form-label">Carga HorÃ¡ria</label>
+                            <input type="number" name="carga_horaria" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=disciplina.getCargaHoraria()%>" class="form-control">
+                        </div>
+                        <div>
+                            <input type="submit" name="btEnviar" value="<%=acao%>" class="btn btn-primary">
+                            <a href="/aplicacaoMVC/admin/DisciplinaController?acao=Listar" class="btn btn-danger">Retornar</a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
         </div>
-    </form>
-</div>
-<%@ include file="/views/comun/footer.jsp" %>
+        <script src="http://localhost:8080/aplicacaoMVC/views/bootstrap/bootstrap.bundle.min.js"></script>
+    </body>
+
+</html>
