@@ -67,20 +67,20 @@ public class AlunoDAO implements Dao<Aluno> {
     try {
         // Especifica as colunas no comando SQL
         PreparedStatement sql = conexao.getConexao().prepareStatement(
-            "INSERT INTO Alunos (id, nome, email, celular, cpf, senha, endereco, cidade, bairro, cep) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            "INSERT INTO Alunos (nome, email, celular, cpf, senha, endereco, cidade, bairro, cep) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
         );
 
         // Define os valores para cada coluna
-        sql.setInt(1, t.getId()); // Inclui o ID fornecido
-        sql.setString(2, t.getNome());
-        sql.setString(3, t.getEmail());
-        sql.setString(4, t.getCelular());
-        sql.setString(5, t.getCpf());
-        sql.setString(6, t.getSenha());
-        sql.setString(7, t.getEndereco());
-        sql.setString(8, t.getCidade());
-        sql.setString(9, t.getBairro());
-        sql.setString(10, t.getCep());
+        //sql.setInt(1, t.getId()); // Inclui o ID fornecido
+        sql.setString(1, t.getNome());
+        sql.setString(2, t.getEmail());
+        sql.setString(3, t.getCelular());
+        sql.setString(4, t.getCpf());
+        sql.setString(5, t.getSenha());
+        sql.setString(6, t.getEndereco());
+        sql.setString(7, t.getCidade());
+        sql.setString(8, t.getBairro());
+        sql.setString(9, t.getCep());
 
         // Executa a query
         sql.executeUpdate();

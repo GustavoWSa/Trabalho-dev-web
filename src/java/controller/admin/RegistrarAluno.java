@@ -69,79 +69,61 @@ public class RegistrarAluno extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
-        throws ServletException, IOException {
-        
-        int id = Integer.parseInt(request.getParameter("id"));
-        //request.getParameter("id").isEmpty() ? 0 : Integer.parseInt(request.getParameter("id"));
-        String nome = request.getParameter("nome");
-        String email = request.getParameter("email");
-        String celular = request.getParameter("celular");
-        String cpf = request.getParameter("cpf");
-        String senha = request.getParameter("senha");
-        String endereco = request.getParameter("endereco");
-        String cidade = request.getParameter("cidade");
-        String bairro = request.getParameter("bairro");
-        String cep = request.getParameter("cep");
-        String btEnviar = request.getParameter("btEnviar");
+protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    throws ServletException, IOException {
+
+    // Não precisamos mais do id aqui
+    String nome = request.getParameter("nome");
+    String email = request.getParameter("email");
+    String celular = request.getParameter("celular");
+    String cpf = request.getParameter("cpf");
+    String senha = request.getParameter("senha");
+    String endereco = request.getParameter("endereco");
+    String cidade = request.getParameter("cidade");
+    String bairro = request.getParameter("bairro");
+    String cep = request.getParameter("cep");
+    String btEnviar = request.getParameter("btEnviar");
 
     RequestDispatcher rd;
 
-    if (nome.isEmpty()) {
-            Aluno aluno = new Aluno();
-            switch (btEnviar) {
-                case "Alterar":
-                case "Excluir":
-                    try {
-                    AlunoDAO alunoDAO = new AlunoDAO();
-                    aluno = alunoDAO.get(id);
+    // Verifique se o nome está vazio
+    if (nome == null || nome.isEmpty()) {
+        // Criar um novo objeto de aluno vazio
+        Aluno aluno = new Aluno();
+        request.setAttribute("aluno", aluno);
+        request.setAttribute("acao", btEnviar);
+        request.setAttribute("msgError", "É necessário preencher todos os campos");
+        rd = request.getRequestDispatcher("/views/admin/Alunos/formRegistrarAluno.jsp");
+        rd.forward(request, response);
+    } else {
+        // Criação do aluno sem id
+        Aluno aluno = new Aluno(nome, email, celular, cpf, senha, endereco, cidade, bairro, cep);
+        AlunoDAO alunoDAO = new AlunoDAO();
 
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                    throw new RuntimeException("Falha em uma query para cadastro de Aluno");
-                }
-                break;
+        try {
+            switch (btEnviar) {
+                case "Incluir":
+                    alunoDAO.insert(aluno); // O id será gerado automaticamente pelo banco
+                    request.setAttribute("msgOperacaoRealizada", "Inclusão realizada com sucesso");
+                    break;
+                case "Alterar":
+                    alunoDAO.update(aluno); // O aluno já tem o id (o id foi capturado na seleção)
+                    request.setAttribute("msgOperacaoRealizada", "Alteração realizada com sucesso");
+                    break;
+                case "Excluir":
+                    alunoDAO.delete(aluno.getId()); // O id será passado para exclusão
+                    request.setAttribute("msgOperacaoRealizada", "Exclusão realizada com sucesso");
+                    break;
             }
 
-            request.setAttribute("nome", aluno);
-            request.setAttribute("acao", btEnviar);
-
-            request.setAttribute("msgError", "É necessário preencher todos os campos");
-
-            rd = request.getRequestDispatcher("/views/admin/Alunos/formRegistrarAluno.jsp");
+            request.setAttribute("link", "/aplicacaoMVC/admin/RegistrarAluno?acao=Listar");
+            rd = request.getRequestDispatcher("/views/comum/showMessage.jsp");
             rd.forward(request, response);
 
-        } else {
-            
-             Aluno aluno = new Aluno(id,nome,cidade,cpf,email,celular,senha,endereco,bairro,cep);
-             AlunoDAO alunoDAO = new AlunoDAO();
-
-            try {
-                switch (btEnviar) {
-                    case "Incluir":
-                        alunoDAO.insert(aluno);
-                        request.setAttribute("msgOperacaoRealizada", "Inclusão realizada com sucesso");
-                        break;
-                    case "Alterar":
-                        alunoDAO.update(aluno);
-                        request.setAttribute("msgOperacaoRealizada", "Alteração realizada com sucesso");
-                        break;
-                    case "Excluir":
-                        alunoDAO.delete(id);
-                        request.setAttribute("msgOperacaoRealizada", "Exclusão realizada com sucesso");
-                        break;
-                }
-
-                request.setAttribute("link", "/aplicacaoMVC/admin/RegistrarAluno?acao=Listar");
-                rd = request.getRequestDispatcher("/views/comum/showMessage.jsp");
-                rd.forward(request, response);
-
-            } catch (IOException | ServletException ex) {
-                System.out.println(ex.getMessage());
-                throw new RuntimeException("Falha em uma query para cadastro de Aluno");
-            }
+        } catch (IOException | ServletException ex) {
+            System.out.println(ex.getMessage());
+            throw new RuntimeException("Falha em uma query para cadastro de Aluno");
         }
     }
-
-
+}
 }
