@@ -1,6 +1,10 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.ArrayList"%>
+<%-- 
+    Document   : relatorio
+    Created on : 19 Dec 2024, 19:54:53
+    Author     : gusta
+--%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>

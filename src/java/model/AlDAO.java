@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `alunos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
  */
 
-public class AlunoDAO implements Dao<Aluno> {
+public class AlDAO implements Dao<Aluno> {
 
     @Override
     public Aluno get(int id) {
