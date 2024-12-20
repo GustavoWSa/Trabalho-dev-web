@@ -36,7 +36,6 @@
                     </div>
                     <% }%>
         <form action="/aplicacaoMVC/admin/RegistrarAluno" method="POST">
-            <input type="hidden" name="id" value="<%=aluno.getId()%>" class="form-control">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome</label>
                 <input type="text" name="nome" class="form-control" required>
