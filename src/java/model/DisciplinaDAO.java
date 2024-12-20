@@ -34,13 +34,21 @@ public class DisciplinaDAO implements Dao<Disciplina> {
     public void insert(Disciplina t) {
         Conexao conexao = new Conexao();
         try {
+            // Definindo a consulta SQL de inserção
             String query = "INSERT INTO disciplina (nome, requisito, ementa, carga_horaria) VALUES (?, ?, ?, ?)";
+            
+            // Preparando a instrução SQL
             PreparedStatement sql = conexao.getConexao().prepareStatement(query);
+            
+            // Definindo os valores dos parâmetros
             sql.setString(1, t.getNome());
             sql.setString(2, t.getRequisito());
             sql.setString(3, t.getEmenta());
             sql.setInt(4, t.getCargaHoraria());
-            sql.executeUpdate();
+
+            // Executando a inserção de dados no banco
+            sql.executeUpdate();  // Usamos executeUpdate para executar o INSERT
+            System.out.println("Disciplina inserida com sucesso!");
         } catch (SQLException e) {
             System.err.println("Erro ao inserir disciplina: " + e.getMessage());
         } finally {

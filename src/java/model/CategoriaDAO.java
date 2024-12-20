@@ -8,13 +8,13 @@ import entidade.Categoria;
 
 /*
 --
--- Estrutura da tabela `categorias`
+-- Estrutura da tabela categorias
 --
 
-CREATE TABLE IF NOT EXISTS `categorias` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `descricao` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE IF NOT EXISTS categorias (
+  id int NOT NULL AUTO_INCREMENT,
+  descricao varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 

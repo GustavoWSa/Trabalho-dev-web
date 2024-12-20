@@ -1,13 +1,60 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entidade;
 
-/**
- *
- * @author gusta
- */
 public class Turma {
-    
+    private int id;
+    private int professorId;
+    private int disciplinaId;
+    private int alunoId;
+    private String codigoTurma;
+    private double nota;
+
+    // Getters e setters
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getProfessorId() {
+        return professorId;
+    }
+
+    public void setProfessorId(int professorId) {
+        this.professorId = professorId;
+    }
+
+    public int getDisciplinaId() {
+        return disciplinaId;
+    }
+
+    public void setDisciplinaId(int disciplinaId) {
+        this.disciplinaId = disciplinaId;
+    }
+
+    public int getAlunoId() {
+        return alunoId;
+    }
+
+    public void setAlunoId(int alunoId) {
+        this.alunoId = alunoId;
+    }
+
+    public String getCodigoTurma() {
+        return codigoTurma;
+    }
+
+    public void setCodigoTurma(String codigoTurma) {
+        this.codigoTurma = codigoTurma;
+    }
+
+    public double getNota() {
+        return nota;
+    }
+
+    public void setNota(double nota) {
+        this.nota = nota;
+    }
 }
