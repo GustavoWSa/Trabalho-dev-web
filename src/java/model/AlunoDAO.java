@@ -41,16 +41,16 @@ public class AlunoDAO implements Dao<Aluno> {
 
             if (resultado != null) {
                 while (resultado.next()) {
-                    aluno.setId(Integer.parseInt(resultado.getString("ID")));
-                    aluno.setNome(resultado.getString("NOME"));
-                    aluno.setEmail(resultado.getString("EMAIL"));
-                    aluno.setCelular(resultado.getString("CELULAR"));
-                    aluno.setCpf(resultado.getString("CPF"));
-                    aluno.setSenha(resultado.getString("SENHA"));
-                    aluno.setEndereco(resultado.getString("ENDERECO"));
-                    aluno.setCidade(resultado.getString("CIDADE"));
-                    aluno.setBairro(resultado.getString("BAIRRO"));
-                    aluno.setCep(resultado.getString("CEP"));
+                    aluno.setId(Integer.parseInt(resultado.getString("id")));
+                    aluno.setNome(resultado.getString("nome"));
+                    aluno.setEmail(resultado.getString("email"));
+                    aluno.setCelular(resultado.getString("celular"));
+                    aluno.setCpf(resultado.getString("cpf"));
+                    aluno.setSenha(resultado.getString("senha"));
+                    aluno.setEndereco(resultado.getString("endereco"));
+                    aluno.setCidade(resultado.getString("cidade"));
+                    aluno.setBairro(resultado.getString("bairro"));
+                    aluno.setCep(resultado.getString("cep"));
                 }
             }
         } catch (SQLException e) {
@@ -63,28 +63,37 @@ public class AlunoDAO implements Dao<Aluno> {
 
     @Override
     public void insert(Aluno t) {
+    Conexao conexao = new Conexao();
+    try {
+        // Especifica as colunas no comando SQL
+        PreparedStatement sql = conexao.getConexao().prepareStatement(
+            "INSERT INTO Alunos (id, nome, email, celular, cpf, senha, endereco, cidade, bairro, cep) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        );
 
-        Conexao conexao = new Conexao();
-        try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO Alunos VALUES (?),(?),(?),(?),(?),(?),(?),(?),(?),");
-            sql.setInt(1, t.getId());
-            sql.setString(1, t.getNome());
-            sql.setString(1, t.getEmail());
-            sql.setString(1, t.getCelular());
-            sql.setString(1, t.getCpf());
-            sql.setString(1, t.getSenha());
-            sql.setString(1, t.getEndereco());
-            sql.setString(1, t.getCidade());
-            sql.setString(1, t.getBairro());
-            sql.setString(1, t.getCep());
-            sql.executeUpdate();
+        // Define os valores para cada coluna
+        sql.setInt(1, t.getId()); // Inclui o ID fornecido
+        sql.setString(2, t.getNome());
+        sql.setString(3, t.getEmail());
+        sql.setString(4, t.getCelular());
+        sql.setString(5, t.getCpf());
+        sql.setString(6, t.getSenha());
+        sql.setString(7, t.getEndereco());
+        sql.setString(8, t.getCidade());
+        sql.setString(9, t.getBairro());
+        sql.setString(10, t.getCep());
 
-        } catch (SQLException e) {
-            System.err.println("Query de insert (aluno) incorreta");
-        } finally {
-            conexao.closeConexao();
-        }
+        // Executa a query
+        sql.executeUpdate();
+        System.out.println("Aluno inserido com sucesso!");
+
+    } catch (SQLException e) {
+        System.err.println("Erro ao inserir aluno: " + e.getMessage());
+    } finally {
+        conexao.closeConexao();
     }
+}
+
+
 
     @Override
     public void update(Aluno t) {

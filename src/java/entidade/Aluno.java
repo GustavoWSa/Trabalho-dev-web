@@ -66,18 +66,6 @@ public class Aluno {
     }
     
     
-    public Aluno (String nome, String cpf, String endereco, String senha, String cidade, String bairro, String cep, String email, String celular) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.endereco = endereco;
-        this.senha = senha;
-        this.bairro = bairro;
-        this.celular = celular;
-        this.cidade = cidade;
-        this.email = email;
-        this.cep = cep;
-        
-    }
     public Aluno(int id, String nome, String email, String celular, String cpf, String senha, String endereco, String cidade, String bairro, String cep) {
         this.id = id;
         this.nome = nome;

@@ -28,11 +28,12 @@
                                 <th scope="col">Nome</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Celular</th>
+                                <th scope="col">CPF</th>
+                                <th scope="col">Senha</th>
+                                <th scope="col">Endereco</th>
                                 <th scope="col">Cidade</th>
                                 <th scope="col">Bairro</th>
-                                <th scope="col">CEP</th>
-                                <th scope="col">CPF</th>
-                                <th scope="col">Endereço</th>
+                                <th scope="col">Cep</th>
                                 <th scope="col">Ações</th>
                             </tr>
                         </thead>
@@ -47,11 +48,13 @@
                                     out.println("<td>" + aluno.getNome() + "</td>");
                                     out.println("<td>" + aluno.getEmail() + "</td>");
                                     out.println("<td>" + aluno.getCelular() + "</td>");
+                                    out.println("<td>" + aluno.getCpf() + "</td>");
+                                    out.println("<td>" + aluno.getSenha() + "</td>");
+                                    out.println("<td>" + aluno.getEndereco() + "</td>");
                                     out.println("<td>" + aluno.getCidade() + "</td>");
                                     out.println("<td>" + aluno.getBairro() + "</td>");
                                     out.println("<td>" + aluno.getCep() + "</td>");
-                                    out.println("<td>" + aluno.getCpf() + "</td>");
-                                    out.println("<td>" + aluno.getEndereco() + "</td>");
+                                    
                             %>
                             <td>
                                 <a href="/aplicacaoMVC/admin/RegistrarAluno?acao=Alterar&id=<%=aluno.getId()%>" class="btn btn-warning">Alterar</a>
