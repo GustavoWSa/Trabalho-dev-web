@@ -1,10 +1,11 @@
 package model;
 
+import entidade.Aluno;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import entidade.Aluno;
+
 
 /*
 --
@@ -27,155 +28,137 @@ CREATE TABLE IF NOT EXISTS `alunos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
  */
 
+public class AlunoDAO implements Dao<Aluno> {
 
-public class AlunoDAO {
-
-    public void Inserir(Aluno Aluno) throws Exception {
+    @Override
+    public Aluno get(int id) {
         Conexao conexao = new Conexao();
+        Aluno aluno = new Aluno();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO Alunos (id, nome, email, celular, cpf, senha, endereco, cidade, bairro, cep)"
-                    + " VALUES (?,?,?,?,?,?,?,?,?,?)");
-            sql.setInt(1, Aluno.getId());
-            sql.setString(2, Aluno.getNome());
-            sql.setString(3, Aluno.getEmail());
-            sql.setString(4, Aluno.getCelular());
-            sql.setString(5, Aluno.getCpf());
-            sql.setString(6, Aluno.getSenha());
-            sql.setString(7, Aluno.getEndereco());
-            sql.setString(8, Aluno.getCidade());
-            sql.setString(9, Aluno.getBairro());
-            sql.setString(10, Aluno.getCep());
-            sql.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException();
-        } finally {
-            conexao.closeConexao();
-        }
-    }
-
-    public Aluno getAluno(int id) throws Exception {
-        Conexao conexao = new Conexao();
-        try {
-            Aluno Aluno = new Aluno();
             PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM Alunos WHERE ID = ? ");
             sql.setInt(1, id);
             ResultSet resultado = sql.executeQuery();
+
             if (resultado != null) {
                 while (resultado.next()) {
-                    Aluno.setId(Integer.parseInt(resultado.getString("ID")));
-                    Aluno.setNome(resultado.getString("NOME"));
-                    Aluno.setEmail(resultado.getString("EMAIL"));
-                    Aluno.setCelular(resultado.getString("CELULAR"));
-                    Aluno.setCpf(resultado.getString("CPF"));
-                    Aluno.setSenha(resultado.getString("SENHA"));
-                    Aluno.setEndereco(resultado.getString("ENDERECO"));
-                    Aluno.setCidade(resultado.getString("CIDADE"));
-                    Aluno.setBairro(resultado.getString("BAIRRO"));
-                    Aluno.setCep(resultado.getString("CEP"));
+                    aluno.setId(Integer.parseInt(resultado.getString("id")));
+                    aluno.setNome(resultado.getString("nome"));
+                    aluno.setEmail(resultado.getString("email"));
+                    aluno.setCelular(resultado.getString("celular"));
+                    aluno.setCpf(resultado.getString("cpf"));
+                    aluno.setSenha(resultado.getString("senha"));
+                    aluno.setEndereco(resultado.getString("endereco"));
+                    aluno.setCidade(resultado.getString("cidade"));
+                    aluno.setBairro(resultado.getString("bairro"));
+                    aluno.setCep(resultado.getString("cep"));
                 }
             }
-            return Aluno;
-
         } catch (SQLException e) {
-            throw new RuntimeException("Query de select (get) incorreta");
+            System.err.println("Query de select (get aluno) incorreta");
         } finally {
             conexao.closeConexao();
         }
+        return aluno;
     }
 
-    public void Alterar(Aluno Aluno) throws Exception {
+    @Override
+    public void insert(Aluno t) {
+    Conexao conexao = new Conexao();
+    try {
+        // Especifica as colunas no comando SQL
+        PreparedStatement sql = conexao.getConexao().prepareStatement(
+            "INSERT INTO Alunos (id, nome, email, celular, cpf, senha, endereco, cidade, bairro, cep) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        );
+
+        // Define os valores para cada coluna
+        sql.setInt(1, t.getId()); // Inclui o ID fornecido
+        sql.setString(2, t.getNome());
+        sql.setString(3, t.getEmail());
+        sql.setString(4, t.getCelular());
+        sql.setString(5, t.getCpf());
+        sql.setString(6, t.getSenha());
+        sql.setString(7, t.getEndereco());
+        sql.setString(8, t.getCidade());
+        sql.setString(9, t.getBairro());
+        sql.setString(10, t.getCep());
+
+        // Executa a query
+        sql.executeUpdate();
+        System.out.println("Aluno inserido com sucesso!");
+
+    } catch (SQLException e) {
+        System.err.println("Erro ao inserir aluno: " + e.getMessage());
+    } finally {
+        conexao.closeConexao();
+    }
+}
+
+
+
+    @Override
+    public void update(Aluno t) {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE Alunos SET nome = ?, email = ?, celular = ?, cpf = ?, senha = ?, endereco = ?, cidade = ?, bairro = ?, cep = ?  WHERE ID = ? ");
-            sql.setString(1, Aluno.getNome());
-            sql.setString(2, Aluno.getEmail());
-            sql.setString(3, Aluno.getCelular());
-            sql.setString(4, Aluno.getCpf());
-            sql.setString(5, Aluno.getSenha());
-            sql.setString(6, Aluno.getEndereco());
-            sql.setString(7, Aluno.getCidade());
-            sql.setString(8, Aluno.getBairro());
-            sql.setString(9, Aluno.getCep());
+            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE Alunos SET senha = ?  WHERE ID = ? ");
+            sql.setString(1, t.getSenha());
+            sql.setInt(2, t.getId());
             sql.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de update (alterar) incorreta");
+            System.err.println("Query de update (alterar aluno) incorreta");
         } finally {
             conexao.closeConexao();
         }
     }
 
-    public void Excluir(Aluno Aluno) throws Exception {
+    @Override
+    public void delete(int id) {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("DELETE FROM Aluno WHERE ID = ? ");
-            sql.setInt(1, Aluno.getId());
+            PreparedStatement sql = conexao.getConexao().prepareStatement("DELETE FROM Alunos WHERE ID = ? ");
+            sql.setInt(1, id);
             sql.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de delete (excluir) incorreta");
+            System.err.println("Query de delete (excluir aluno) incorreta");
         } finally {
             conexao.closeConexao();
         }
     }
 
-    public ArrayList<Aluno> ListaDeAlunos() {
+    @Override
+    public ArrayList<Aluno> getAll() {
+
         ArrayList<Aluno> meusAlunos = new ArrayList();
         Conexao conexao = new Conexao();
         try {
-            String selectSQL = "SELECT * FROM Aluno order by nome";
+            String selectSQL = "SELECT * FROM Alunos";
             PreparedStatement preparedStatement;
             preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
             ResultSet resultado = preparedStatement.executeQuery();
             if (resultado != null) {
                 while (resultado.next()) {
-                    Aluno Aluno = new Aluno(resultado.getString("NOME"),
-                            resultado.getString("EMAIL"),
-                            resultado.getString("CELULAR"),
-                            resultado.getString("CPF"),
-                            resultado.getString("SENHA"),
-                            resultado.getString("ENDERECO"),
-                            resultado.getString("CIDADE"),
-                            resultado.getString("BAIRRO"),
-                            resultado.getString("CEP"));
-                    Aluno.setId(Integer.parseInt(resultado.getString("id")));
+                    Aluno Aluno = new Aluno(
+                            resultado.getInt("ID"),
+                            resultado.getString("Nome"),
+                            resultado.getString("Email"),
+                            resultado.getString("Celular"),
+                            resultado.getString("Cpf"),
+                            resultado.getString("Senha"),
+                            resultado.getString("Endereco"),
+                            resultado.getString("Cidade"),
+                            resultado.getString("Bairro"),
+                            resultado.getString("Cep")
+                                
+                    );
                     meusAlunos.add(Aluno);
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Query de select (ListaDeAlunos) incorreta");
+            System.err.println("Query de select (GetAll - alunos) incorreta");
         } finally {
             conexao.closeConexao();
         }
         return meusAlunos;
     }
-
-    public Aluno Logar(Aluno Aluno) throws Exception {
-        Conexao conexao = new Conexao();
-        try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM Alunos WHERE cpf=? and senha =? LIMIT 1");
-            sql.setString(1, Aluno.getCpf());
-            sql.setString(2, Aluno.getSenha());
-            ResultSet resultado = sql.executeQuery();
-            Aluno AlunoObtido = new Aluno();
-            if (resultado != null) {
-                while (resultado.next()) {
-                    AlunoObtido.setId(Integer.parseInt(resultado.getString("ID")));
-                    AlunoObtido.setNome(resultado.getString("NOME"));
-                    AlunoObtido.setCpf(resultado.getString("CPF"));
-                    AlunoObtido.setEndereco(resultado.getString("ENDERECO"));
-                    AlunoObtido.setSenha(resultado.getString("SENHA"));
-                }
-            }
-            return AlunoObtido;
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("Query de select (get) incorreta");
-        } finally {
-            conexao.closeConexao();
-        }
-    }
-
 }
