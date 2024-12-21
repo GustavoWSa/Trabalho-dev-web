@@ -41,30 +41,36 @@
                         <%= msgError%>
                     </div>
                     <% }%>
-        <form action="DisciplinaController" method="POST">
-            <div class="mb-3">
-                <label for="nome" class="form-label">Nome</label>
-                <input type="text" name="nome" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="requisito" class="form-label">Requisito</label>
-                <input type="text" name="requisito" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="ementa" class="form-label">Ementa</label>
-                <input type="text" name="ementa" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="carga_horaria" class="form-label">Carga Horária</label>
-                <input type="number" name="carga_horaria" class="form-control" required>
-            </div>
-            <div class="row">
-                <div class="col-sm-2">
-                    <input type="submit" value="Registrar" class="btn btn-primary">
-                </div>
-            </div>
-         </form>
-
+                    <form action="DisciplinaController" method="POST">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" name="nome" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="requisito" class="form-label">Requisito</label>
+                            <input type="text" name="requisito" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ementa" class="form-label">Ementa</label>
+                            <input type="text" name="ementa" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="carga_horaria" class="form-label">Carga Horária</label>
+                            <input type="number" name="carga_horaria" class="form-control" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <!-- Agora, cada botão envia um valor para btEnviar -->
+                                <input type="submit" name="btEnviar" value="Incluir" class="btn btn-primary">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="submit" name="btEnviar" value="Alterar" class="btn btn-warning">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="submit" name="btEnviar" value="Excluir" class="btn btn-danger">
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

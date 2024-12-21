@@ -18,7 +18,6 @@
                             <a class="nav-link" href="/aplicacaoMVC/admin/DisciplinaController?acao=Listar">Disciplinas</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/TurmaController?acao=Listar">Turmas</a> <!-- Link para Turmas -->
                             <a class="nav-link" href="/aplicacaoMVC/admin/RegistrarAluno">Registrar aluno</a>
-                            <a class="nav-link" href="/aplicacaoMVC/admin/AdministradorController">Registrar administrador</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/ProfessorController">Professores</a> <!-- Link para Professores -->
                             <a class="nav-link" href="/aplicacaoMVC/admin/logOut">Logout</a>
                 <%  } else { %>
