@@ -73,11 +73,10 @@
                 <input type="text" name="cep" class="form-control">
             </div>
             <div>
-            <input type="submit" name="btEnviar" value="<%=acao%>" class="btn btn-primary">
-            <a href="/aplicacaoMVC/admin/RegistrarAluno?acao=Listar" class="btn btn-danger">Retornar</a>
-                        </div>
+                <input type="submit" name="btEnviar" value="<%=acao%>" class="btn btn-primary">
+                <a href="/aplicacaoMVC/admin/RegistrarAluno?acao=Listar" class="btn btn-danger">Retornar</a>
+            </div>
         </form>
     </div>
-        <script src="http://localhost:8080/aplicacaoMVC/views/bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,66 +1,68 @@
-
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="entidade.Turma" %>
-<%@ page import="entidade.Disciplina" %>
-<%@ page import="entidade.Aluno" %>
-<%@ page import="entidade.Professor" %>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entidade.Turma"%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Turma</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>${acao == 'Incluir' ? 'Cadastrar' : 'Alterar'} Turma</h1>
+    <div class="container">
+         <jsp:include page="../../comum/menu.jsp" />
+            <div class="row mt-5">
+                <div class="col-sm-4 offset-3">
+                    <%
+                        Turma turma = (Turma) request.getAttribute("turma");
+                        String acao = (String) request.getAttribute("acao");
+                        switch (acao) {
+                            case "Incluir":
+                                out.println("<h1>Incluir Turma</h1>");
+                                break;
+                            case "Alterar":
+                                out.println("<h1>Alterar Turma</h1>");
+                                break;
+                            case "Excluir":
+                                out.println("<h1>Excluir Turma</h1>");
+                                break;
+                        }
 
-    <form action="TurmaController" method="post">
-        <input type="hidden" name="acao" value="${acao}">
-        <input type="hidden" name="id" value="${turma.id}">
-
-        <div>
-            <label for="professor_id">Professor:</label>
-            <select name="professor_id" id="professor_id" required>
-                <c:forEach var="professor" items="${listaProfessores}">
-                    <option value="${professor.id}" <c:if test="${professor.id == turma.professorId}">selected</c:if>>${professor.nome}</option>
-                </c:forEach>
-            </select>
-        </div>
-
-        <div>
-            <label for="disciplina_id">Disciplina:</label>
-            <select name="disciplina_id" id="disciplina_id" required>
-                <c:forEach var="disciplina" items="${listaDisciplinas}">
-                    <option value="${disciplina.id}" <c:if test="${disciplina.id == turma.disciplinaId}">selected</c:if>>${disciplina.nome}</option>
-                </c:forEach>
-            </select>
-        </div>
-
-        <div>
-            <label for="aluno_id">Aluno:</label>
-            <select name="aluno_id" id="aluno_id" required>
-                <c:forEach var="aluno" items="${listaAlunos}">
-                    <option value="${aluno.id}" <c:if test="${aluno.id == turma.alunoId}">selected</c:if>>${aluno.nome}</option>
-                </c:forEach>
-            </select>
-        </div>
-
-        <div>
-            <label for="codigo_turma">Código da Turma:</label>
-            <input type="text" name="codigo_turma" id="codigo_turma" value="${turma.codigoTurma}" required>
-        </div>
-
-        <div>
-            <label for="nota">Nota:</label>
-            <input type="number" step="0.01" name="nota" id="nota" value="${turma.nota}" required>
-        </div>
-
-        <div>
-            <button type="submit">${acao == 'Incluir' ? 'Cadastrar' : 'Alterar'} Turma</button>
-        </div>
-    </form>
-
-    <a href="/aplicacaoMVC/admin/TurmaController?acao=Listar">Voltar para a lista de turmas</a>
+                        String msgError = (String) request.getAttribute("msgError");
+                        if ((msgError != null) && (!msgError.isEmpty())) {%>
+                    <div class="alert alert-danger" role="alert">
+                        <%= msgError%>
+                    </div>
+                    <% }%>
+        <form action="TurmaController?action=salvar" method="POST">
+            <div class="mb-3">
+                <label for="professor_id" class="form-label">Codigo professor</label>
+                <input type="text" name="professor_id" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="disciplina_id" class="form-label">Codigo disciplina</label>
+                <input type="text" name="disciplina_id" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="aluno_id" class="form-label">Codigo aluno</label>
+                <input type="text" name="aluno_id" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="codigo_turma" class="form-label">Codigo turma</label>
+                <input type="text" name="codigo_turma" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="nota" class="form-label">Nota</label>
+                <input type="text" name="nota" class="form-control" required>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">
+                    <input type="submit" name="btEnviar" value="<%=acao%>" class="btn btn-primary">
+                    <a href="/aplicacaoMVC/admin/TurmaController?acao=Listar" class="btn btn-danger">Retornar</a>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
