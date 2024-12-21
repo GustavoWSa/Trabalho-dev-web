@@ -5,14 +5,18 @@ public class Administrador {
     private int id;
     private String nome;
     private String cpf;
-    private String endereco;
     private String senha;
+    private String aprovado;
+    private String endereco;
+    
+    
 
-    public Administrador(String nome, String cpf, String endereco, String senha) {
+    public Administrador(String nome, String cpf, String senha, String aprovado, String endereco) {
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
         this.senha = senha;
+        this.aprovado = aprovado;
     }
 
     public Administrador(String cpf, String senha) {
@@ -25,7 +29,15 @@ public class Administrador {
         this.nome = "";
         this.cpf = "";
         this.endereco = "";
-        this.senha = "";;
+        this.senha = "";
+        this.aprovado="";
+    }
+
+    public Administrador(String nome, String cpf,  String senha, String endereco) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.senha = senha;
     }
 
     public int getId() {
@@ -66,6 +78,14 @@ public class Administrador {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getAprovado() {
+        return aprovado;
+    }
+
+    public void setAprovado(String aprovado) {
+        this.aprovado = aprovado;
     }
 
 }

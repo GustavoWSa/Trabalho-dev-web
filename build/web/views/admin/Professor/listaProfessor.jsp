@@ -34,7 +34,7 @@
                         <tbody>
                             <%
                                 // Obtém a lista de professores passada pelo controlador
-                                ArrayList<Professor> listaProfessor = (ArrayList<Professor>) request.getAttribute("professores");
+                                ArrayList<Professor> listaProfessor = (ArrayList<Professor>) request.getAttribute("listaProfessor");
 
                                 if (listaProfessor != null) {
                                     for (Professor professor : listaProfessor) {

@@ -98,28 +98,39 @@ public class AlunoDAO implements Dao<Aluno> {
 
     @Override
     public void update(Aluno aluno) {
-        Conexao conexao = new Conexao();
-        String sql = "UPDATE alunos SET nome = ?, email = ?, celular = ?, cpf = ?, senha = ?, endereco = ?, cidade = ?, bairro = ?, cep = ? WHERE id = ?";
+    Conexao conexao = new Conexao();
+    String sql = "UPDATE alunos SET nome = ?, email = ?, celular = ?, cpf = ?, senha = ?, endereco = ?, cidade = ?, bairro = ?, cep = ? WHERE id = ?";
+    try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
+        // Definindo os valores dos campos para a atualização
+        stmt.setString(1, aluno.getNome());
+        stmt.setString(2, aluno.getEmail());
+        stmt.setString(3, aluno.getCelular());
+        stmt.setString(4, aluno.getCpf());
+        stmt.setString(5, aluno.getSenha());
+        stmt.setString(6, aluno.getEndereco());
+        stmt.setString(7, aluno.getCidade());
+        stmt.setString(8, aluno.getBairro());
+        stmt.setString(9, aluno.getCep());
+        stmt.setInt(10, aluno.getId());
 
-        try (Connection conn = conexao.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        // Executa a atualização no banco de dados
+        int rowsAffected = stmt.executeUpdate();
 
-            stmt.setString(1, aluno.getNome());
-            stmt.setString(2, aluno.getEmail());
-            stmt.setString(3, aluno.getCelular());
-            stmt.setString(4, aluno.getCpf());
-            stmt.setString(5, aluno.getSenha());
-            stmt.setString(6, aluno.getEndereco());
-            stmt.setString(7, aluno.getCidade());
-            stmt.setString(8, aluno.getBairro());
-            stmt.setString(9, aluno.getCep());
-            stmt.setInt(10, aluno.getId());
-
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            System.err.println("Erro ao atualizar aluno: " + e.getMessage());
+        if (rowsAffected > 0) {
+            System.out.println("Aluno atualizado com sucesso!");
+        } else {
+            System.out.println("Nenhum aluno encontrado com o ID especificado para atualização.");
         }
+
+    } catch (SQLException e) {
+        System.err.println("Erro ao atualizar aluno: " + e.getMessage());
+        e.printStackTrace();
+    } finally {
+        conexao.closeConexao();
     }
+}
+
+
 
     
 

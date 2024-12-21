@@ -1,6 +1,6 @@
-<%@page import="entidade.Aluno"%>
-<%@page import="java.util.ArrayList"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="entidade.Aluno" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -54,7 +54,6 @@
                                     out.println("<td>" + aluno.getCidade() + "</td>");
                                     out.println("<td>" + aluno.getBairro() + "</td>");
                                     out.println("<td>" + aluno.getCep() + "</td>");
-                                    
                             %>
                             <td>
                                 <a href="/aplicacaoMVC/admin/RegistrarAluno?acao=Alterar&id=<%=aluno.getId()%>" class="btn btn-warning">Alterar</a>
