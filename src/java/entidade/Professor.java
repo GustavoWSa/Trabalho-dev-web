@@ -8,6 +8,51 @@ public class Professor {
     private String senha;
 
     // Getters e Setters
+   
+  public Professor(int id, String nome) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    
+    
+    public Professor(int id, String nome,String email,String cpf, String senha) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+        this.senha = senha;
+    }
+    
+    public Professor( String nome, String email, String cpf, String senha) {
+        //this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+        this.senha = senha;
+    }
+
+
+    public Professor(String cpf, String senha) {
+        this.cpf = cpf;
+        this.senha = senha;
+    }
+
+    public Professor() {
+        this.id = 0;
+        this.nome = "";
+        this.email = "";
+        this.cpf = "";
+        this.senha = "";
+    }
+
     public int getId() {
         return id;
     }
@@ -24,22 +69,6 @@ public class Professor {
         this.nome = nome;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
     public String getSenha() {
         return senha;
     }
@@ -47,4 +76,13 @@ public class Professor {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    
+      public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
 }
