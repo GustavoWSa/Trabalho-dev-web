@@ -2,9 +2,9 @@ package entidade;
 
 public class Turma {
     private int id;
-    private int professorId;
-    private int disciplinaId;
-    private int alunoId;
+    private int professor_id;
+    private int disciplina_id;
+    private int aluno_id;
     private String codigoTurma;
     private double nota;
 
@@ -18,35 +18,35 @@ public class Turma {
         this.id = id;
     }
 
-    public int getProfessorId() {
-        return professorId;
+    public int getProfessor_id() {
+        return professor_id;
     }
 
-    public void setProfessorId(int professorId) {
-        this.professorId = professorId;
+    public void setProfessor_id(int professor_id) {
+        this.professor_id = professor_id;
     }
 
-    public int getDisciplinaId() {
-        return disciplinaId;
+    public int getDisciplina_id() {
+        return disciplina_id;
     }
 
-    public void setDisciplinaId(int disciplinaId) {
-        this.disciplinaId = disciplinaId;
+    public void setDisciplina_id(int disciplina_id) {
+        this.disciplina_id = disciplina_id;
     }
 
-    public int getAlunoId() {
-        return alunoId;
+    public int getAluno_id() {
+        return aluno_id;
     }
 
-    public void setAlunoId(int alunoId) {
-        this.alunoId = alunoId;
+    public void setAluno_id(int aluno_id) {
+        this.aluno_id = aluno_id;
     }
 
-    public String getCodigoTurma() {
+    public String getCodigo_turma() {
         return codigoTurma;
     }
 
-    public void setCodigoTurma(String codigoTurma) {
+    public void setCodigo_turma(String codigoTurma) {
         this.codigoTurma = codigoTurma;
     }
 

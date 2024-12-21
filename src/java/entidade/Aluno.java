@@ -21,9 +21,6 @@ public class Aluno {
     private String senha;
     private String endereco;
 
-    public Aluno(int id, String nome) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     
     public String getEmail() {
         return email;
