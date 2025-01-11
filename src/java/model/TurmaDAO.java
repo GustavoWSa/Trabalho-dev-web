@@ -10,6 +10,20 @@ import java.util.ArrayList;
 /*
 --
 -- Estrutura para tabela `turmas`
+CREATE TABLE IF NOT EXISTS `turmas` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `professor_id` int(11) NOT NULL,
+  `disciplina_id` int(10) UNSIGNED NOT NULL,
+  `aluno_id` int(11) NOT NULL,
+  `codigo_turma` varchar(2) NOT NULL,
+  `nota` decimal(10,0) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `turmas_FKIndex1` (`disciplina_id`),
+  KEY `professor_FKIndex2` (`professor_id`),
+  KEY `aluno_fk` (`aluno_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
 --
 
 */
@@ -28,11 +42,13 @@ public class TurmaDAO implements Dao<Turma> {
             if (resultado != null) {
                 while (resultado.next()) {
                     turma.setId(Integer.parseInt(resultado.getString("id")));
+                    turma.setProfessor_id(Integer.parseInt(resultado.getString("professor_id")));
+                    turma.setDisciplina_id(Integer.parseInt(resultado.getString("disciplina_id")));
+                    turma.setAluno_id(Integer.parseInt(resultado.getString("aluno_id")));
                     turma.setCodigo_turma(resultado.getString(resultado.getString("codigo_turma")));
-                    turma.setProfessor_id(Integer.parseInt("disciplina_id"));
-                    turma.setDisciplina_id(Integer.parseInt("aluno_id"));
-                    turma.setAluno_id(Integer.parseInt("codigo_turma"));
                     turma.setNota(Double.parseDouble("nota"));
+  
+                    
                 }
             }
         } catch (SQLException e) {
@@ -49,19 +65,22 @@ public class TurmaDAO implements Dao<Turma> {
     try {
         // Especifica as colunas no comando SQL
         PreparedStatement sql = conexao.getConexao().prepareStatement(
-            "INSERT INTO turmas (nome, email, cpf, senha) VALUES (?, ?, ?, ?)"
+            "INSERT INTO turmas (professor_id, disciplina_id, codigo_aluno, codigo_turma, nota) VALUES (?, ?, ?, ?, ?)"
         );
 
         // Define os valores para cada coluna
         //sql.setInt(1, t.getId()); // Inclui o ID fornecido
-        sql.setString(1, t.getCodigo_turma());
-        sql.setString(2, t.getProfessor_id());
-        sql.setString(3, t.getDisciplina_id());
-        sql.setString(4, t.getAluno_id());
+        
+        sql.setInt(1, t.getProfessor_id());
+        sql.setInt(2, t.getDisciplina_id());
+        sql.setInt(3, t.getAluno_id());
+        sql.setString(4, t.getCodigo_turma());
+        sql.setDouble(5, t.getNota());
+        
 
         // Executa a query
         sql.executeUpdate();
-        System.out.println("Turma inserido com sucesso!");
+        System.out.println("Turma inserida com sucesso!");
 
     } catch (SQLException e) {
         System.err.println("Erro ao inserir turma: " + e.getMessage());
@@ -75,17 +94,16 @@ public class TurmaDAO implements Dao<Turma> {
     @Override
     public void update(Turma turma) {
         Conexao conexao = new Conexao();
-        String sql = "UPDATE turmas SET nome = ?, email = ?, cpf = ?, senha = ? WHERE id = ?";
+        String sql = "UPDATE turmas SET professor_id = ?, disciplina_id = ?, aluno_id = ?, codigo_turma = ?, nota = ? WHERE id = ?";
 
         try (Connection conn = conexao.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, turma.getNome());
-            stmt.setString(2, turma.getEmail());
-            stmt.setString(3, turma.getDisciplina_id());
-            stmt.setString(4, turma.getSenha());
-            stmt.setInt(5, turma.getId());
-
+            stmt.setInt(1, turma.getProfessor_id());
+            stmt.setInt(2, turma.getDisciplina_id());
+            stmt.setInt(3, turma.getAluno_id());
+            stmt.setString(4, turma.getCodigo_turma());
+            stmt.setDouble(5, turma.getNota());
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Erro ao atualizar turma: " + e.getMessage());
@@ -123,10 +141,11 @@ public class TurmaDAO implements Dao<Turma> {
                 while (resultado.next()) {
                     Turma Turma = new Turma(
                             resultado.getInt("id"),
-                            resultado.getString("nome"),
-                            resultado.getString("email"),
-                            resultado.getString("cpf"),
-                            resultado.getString("senha")
+                            resultado.getInt("professor_id"),
+                            resultado.getInt("disciplina_id"),
+                            resultado.getInt("aluno_id"),
+                            resultado.getString("codigoTurma"),
+                            resultado.getDouble("nota")
                                 
                     );
                     meusTurmas.add(Turma);

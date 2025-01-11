@@ -8,6 +8,7 @@ public class Turma {
     private String codigoTurma;
     private double nota;
 
+
     // Getters e setters
 
     public int getId() {
@@ -56,5 +57,29 @@ public class Turma {
 
     public void setNota(double nota) {
         this.nota = nota;
+    }
+    public Turma(int id, int professor_id, int disciplina_id, int aluno_id, String codigoTurma, double nota) {
+        this.id = id;
+        this.professor_id = professor_id;
+        this.disciplina_id = disciplina_id;
+        this.aluno_id = aluno_id;
+        this.codigoTurma = codigoTurma;
+        this.nota = nota;
+    }
+    public Turma(int professor_id, int disciplina_id, int aluno_id, String codigoTurma, double nota) {
+        
+        this.professor_id = professor_id;
+        this.disciplina_id = disciplina_id;
+        this.aluno_id = aluno_id;
+        this.codigoTurma = codigoTurma;
+        this.nota = nota;
+    }
+    public Turma() {
+        this.id = 0;
+        this.professor_id = 0;
+        this.disciplina_id = 0;
+        this.aluno_id = 0;
+        this.codigoTurma = "";
+        this.nota = 0;
     }
 }
