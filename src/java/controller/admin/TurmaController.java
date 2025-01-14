@@ -27,8 +27,8 @@ public class TurmaController extends HttpServlet {
         }
         switch (acao) {
             case "Listar":
-                ArrayList<Turma> listaTurmas = turmaDAO.getAll();
-                request.setAttribute("listaTurmas", listaTurmas);
+                ArrayList<Turma> listaTurma = turmaDAO.getAll();
+                request.setAttribute("listaTurma", listaTurma);
                 rd = request.getRequestDispatcher("/views/admin/Turmas/listaTurma.jsp");
                 rd.forward(request, response);
                 break;
@@ -61,7 +61,7 @@ public class TurmaController extends HttpServlet {
                 request.setAttribute("acao", acao);
                 rd = request.getRequestDispatcher("/views/admin/Turmas/formTurma.jsp");
                 rd.forward(request, response);
-                //break;
+                break;
         }
     }
 
