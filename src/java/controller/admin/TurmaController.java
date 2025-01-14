@@ -21,7 +21,10 @@ public class TurmaController extends HttpServlet {
         Turma turma = new Turma();
         TurmaDAO turmaDAO = new TurmaDAO();
         RequestDispatcher rd;
-
+        if (acao == null) {
+        // Defina um valor padrão ou redirecione para um erro
+        acao = "Listar"; // ou algum valor adequado
+        }
         switch (acao) {
             case "Listar":
                 ArrayList<Turma> listaTurmas = turmaDAO.getAll();
@@ -31,82 +34,98 @@ public class TurmaController extends HttpServlet {
                 break;
 
             case "Alterar":
+                int idAlterar = Integer.parseInt(request.getParameter("id"));
+            try {
+            Turma turmaParaAlterar = turmaDAO.get(idAlterar);
+            request.setAttribute("turma", turmaParaAlterar);
+            request.setAttribute("acao", "Alterar");
+            request.setAttribute("msgError", "");
+            } catch (Exception e) {
+            System.out.println("Erro ao buscar turma para alteração: " + e.getMessage());
+            request.setAttribute("msgError", "Falha ao carregar dados da turma.");
+            }
             case "Excluir":
                 int id = Integer.parseInt(request.getParameter("id"));
-                turma = turmaDAO.get(id);
-                request.setAttribute("turma", turma);
-                request.setAttribute("acao", acao);
-                rd = request.getRequestDispatcher("/views/admin/Turmas/formTurma.jsp");
-                rd.forward(request, response);
-                break;
-
+                try {
+                turmaDAO.delete(id); // Exclui o aluno do banco
+                request.setAttribute("msgOperacaoRealizada", "Turma excluída com sucesso!");
+            } catch (Exception e) {
+                request.setAttribute("msgError", "Erro ao excluir turma: " + e.getMessage());
+            }
+            // Redireciona para a listagem após exclusão
+            response.sendRedirect("/aplicacaoMVC/admin/TurmaController?acao=Listar");
+            break;
+ 
             case "Incluir":
                 request.setAttribute("turma", turma);
                 request.setAttribute("acao", acao);
                 rd = request.getRequestDispatcher("/views/admin/Turmas/formTurma.jsp");
                 rd.forward(request, response);
-                break;
+                //break;
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        
+        String idParam = request.getParameter("id");
+        int id = (idParam != null && !idParam.isEmpty()) ? Integer.parseInt(idParam) : 0;
+
+        //int id = Integer.parseInt(request.getParameter("id"));
         int professorId = Integer.parseInt(request.getParameter("professor_id"));
         int disciplinaId = Integer.parseInt(request.getParameter("disciplina_id"));
         int alunoId = Integer.parseInt(request.getParameter("aluno_id"));
         String codigoTurma = request.getParameter("codigo_turma");
         double nota = Double.parseDouble(request.getParameter("nota"));
-        String acao = request.getParameter("acao");
+        String btEnviar = request.getParameter("btEnviar");
 
-        // Validar campos obrigatórios (exemplo: codigoTurma)
-        if (codigoTurma.isEmpty()) {
-            request.setAttribute("msgError", "O campo Código da Turma é obrigatório.");
-            request.setAttribute("acao", acao);
-            request.setAttribute("turma", new Turma(id, professorId, disciplinaId, alunoId, codigoTurma, nota));
+    RequestDispatcher rd;
 
-            RequestDispatcher rd = request.getRequestDispatcher("/views/admin/Turmas/formTurma.jsp");
-            rd.forward(request, response);
+    // Verifique se o nome está vazio
+    if (codigoTurma == null || codigoTurma.isEmpty()) {
+        Turma turma = new Turma();
+        request.setAttribute("turma", turma);
+        request.setAttribute("acao", btEnviar);
+        request.setAttribute("msgError", "É necessário preencher todos os campos");
+        rd = request.getRequestDispatcher("/views/admin/Turmas/formTurma.jsp");
+        rd.forward(request, response);
+    } else {
+        Turma turma;
+        if (id > 0) {
+            // Criação do aluno com ID (para Alterar ou Excluir)
+            turma = new Turma(id, professorId, disciplinaId, alunoId, codigoTurma, nota);
         } else {
-            Turma turma = new Turma(id, professorId, disciplinaId, alunoId, codigoTurma, nota);
-            TurmaDAO turmaDAO = new TurmaDAO();
-            RequestDispatcher rd;
+            // Criação do aluno sem ID (para Incluir)
+            turma = new Turma(professorId, disciplinaId, alunoId, codigoTurma, nota);
+        }
 
-            try {
-                switch (acao) {
-                    case "Incluir":
-                        if (turmaDAO.insert(turma)) {
-                            request.setAttribute("msgOperacaoRealizada", "Inclusão realizada com sucesso");
-                        } else {
-                            request.setAttribute("msgError", "Erro ao incluir turma.");
-                        }
-                        break;
+        TurmaDAO turmaDAO = new TurmaDAO();
 
-                    case "Alterar":
-                        if (turmaDAO.update(turma)) {
-                            request.setAttribute("msgOperacaoRealizada", "Alteração realizada com sucesso");
-                        } else {
-                            request.setAttribute("msgError", "Erro ao alterar turma.");
-                        }
-                        break;
-
-                    case "Excluir":
-                        if (turmaDAO.delete(id)) {
-                            request.setAttribute("msgOperacaoRealizada", "Exclusão realizada com sucesso");
-                        } else {
-                            request.setAttribute("msgError", "Erro ao excluir turma.");
-                        }
-                        break;
-                }
-
-                request.setAttribute("link", "/aplicacaoMVC/admin/TurmaController?acao=Listar");
-                rd = request.getRequestDispatcher("/views/comum/showMessage.jsp");
-                rd.forward(request, response);
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-                throw new RuntimeException("Falha em uma query para cadastro de Turma");
+        try {
+            switch (btEnviar) {
+                case "Incluir":
+                    turmaDAO.insert(turma);
+                    request.setAttribute("msgOperacaoRealizada", "Inclusão realizada com sucesso");
+                    break;
+                case "Alterar":
+                    turmaDAO.update(turma);
+                    request.setAttribute("msgOperacaoRealizada", "Alteração realizada com sucesso");
+                    break;
+                case "Excluir":
+                    turmaDAO.delete(turma.getId());
+                    request.setAttribute("msgOperacaoRealizada", "Exclusão realizada com sucesso");
+                    break;
             }
+
+            request.setAttribute("link", "/aplicacaoMVC/admin/TurmaController?acao=Listar");
+            rd = request.getRequestDispatcher("/views/comum/showMessage.jsp");
+            rd.forward(request, response);
+
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage());
+            throw new RuntimeException("Falha em uma query para cadastro de Aluno");
         }
     }
+        }
 }
