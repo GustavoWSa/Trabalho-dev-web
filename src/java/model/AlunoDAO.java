@@ -185,3 +185,29 @@ public class AlunoDAO implements Dao<Aluno> {
         return meusAlunos;
     }
 }
+    public Aluno Logar(Aluno Aluno) throws Exception {
+        Conexao conexao = new Conexao();
+        try {
+            PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM Aluno WHERE cpf=? and senha =? LIMIT 1");
+            sql.setString(1, Aluno.getCpf());
+            sql.setString(2, Aluno.getSenha());
+            ResultSet resultado = sql.executeQuery();
+            Aluno  AlunoObtido = new Aluno();
+            if (resultado != null) {
+                while (resultado.next()) {
+                    AlunoObtido.setId(Integer.parseInt(resultado.getString("ID")));
+                    AlunoObtido.setNome(resultado.getString("NOME"));
+                    AlunoObtido.setCpf(resultado.getString("CPF"));
+                    AlunoObtido.setEndereco(resultado.getString("ENDERECO"));
+                    AlunoObtido.setSenha(resultado.getString("SENHA"));
+                }
+            }
+            return AdministradorObtido;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Query de select (get) incorreta");
+        } finally {
+            conexao.closeConexao();
+        }
+    }
