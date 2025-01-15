@@ -149,4 +149,33 @@ public class ProfessorDAO implements Dao<Professor> {
         }
         return meusProfessores;
     }
+
+    public Professor Logar(Professor Professor) throws Exception {
+        Conexao conexao = new Conexao();
+        try {
+            PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM Professores WHERE cpf=? and senha =? LIMIT 1");
+            sql.setString(1, Professor.getCpf());
+            sql.setString(2, Professor.getSenha());
+            ResultSet resultado = sql.executeQuery();
+            Professor ProfessorObtido = new Professor();
+            if (resultado != null) {
+                while (resultado.next()) {
+                    ProfessorObtido.setId(Integer.parseInt(resultado.getString("ID")));
+                    ProfessorObtido.setNome(resultado.getString("NOME"));
+                    ProfessorObtido.setCpf(resultado.getString("CPF"));
+                    ProfessorObtido.setNome(resultado.getString("NOME"));
+                    ProfessorObtido.setSenha(resultado.getString("SENHA"));
+                }
+            }
+            return ProfessorObtido;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Query de select (get) incorreta");
+        } finally {
+            conexao.closeConexao();
+        }
+    }
+      
 }
+
