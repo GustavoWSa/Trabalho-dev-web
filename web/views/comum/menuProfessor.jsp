@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" import="entidade.Administrador, entidade.Professor" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="entidade.Professor" %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="/aplicacaoMVC/home">Home</a>
@@ -11,28 +11,22 @@
                     // Testar se está logado
                     HttpSession sessao = request.getSession(false);
                     if (sessao != null) {
-                        Administrador administradorLogado = (Administrador) session.getAttribute("administrador");
-                        Professor professorLogado = (Professor) session.getAttribute("professor");
-                        
-                        if (administradorLogado != null) { %>
-                            <!-- Opções do menu para Administrador -->
+                        Professor ProfessorLogado = (Professor) session.getAttribute("professor");
+                        if (ProfessorLogado != null) { %>
                             <a class="nav-link" href="/aplicacaoMVC/admin/dashboard">Dashboard</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/CategoriaController?acao=Listar">Categorias</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/DisciplinaController?acao=Listar">Disciplinas</a>
-                            <a class="nav-link" href="/aplicacaoMVC/admin/TurmaController?acao=Listar">Turmas</a>
+                            <a class="nav-link" href="/aplicacaoMVC/admin/TurmaController?acao=Listar">Turmas</a> <!-- Link para Turmas -->
                             <a class="nav-link" href="/aplicacaoMVC/admin/RegistrarAluno">Registrar aluno</a>
-                            <a class="nav-link" href="/aplicacaoMVC/admin/ProfessorController">Professores</a>
+                            <a class="nav-link" href="/aplicacaoMVC/admin/ProfessorController">Professores</a> <!-- Link para Professores -->
                             <a class="nav-link" href="/aplicacaoMVC/admin/logOut">Logout</a>
-                <%  } else if (professorLogado != null) { %>
-                            <!-- Opções do menu para Professor -->
-                            
                 <%  } else { %>
-                            <!-- Opções para usuário não autenticado -->
                             <a class="nav-link" href="/aplicacaoMVC/MostrarComentarios">Comentários</a>
                             <a class="nav-link" href="/aplicacaoMVC/AutenticaController?acao=Login">Login admin</a>
                             <a class="nav-link" href="/aplicacaoMVC/AutenticaProfessorController?acao=Login">Login professor</a>
+
                 <%    }
-                    } %>
+                    }%>
             </div>
         </div>
     </div>
