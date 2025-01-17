@@ -129,24 +129,27 @@ public class AdministradorDAO implements Dao<Administrador> {
         return meusAdministradores;
     }
 
-    public Administrador Logar(Administrador Administrador) throws Exception {
+    public Administrador Logar(String CPF, String Senha) throws Exception {
         Conexao conexao = new Conexao();
+        Administrador Administrador = new Administrador();
         try {
             PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM Administrador WHERE cpf=? and senha =? LIMIT 1");
-            sql.setString(1, Administrador.getCpf());
-            sql.setString(2, Administrador.getSenha());
+            sql.setString(1, CPF);
+            sql.setString(2, Senha);
             ResultSet resultado = sql.executeQuery();
-            Administrador AdministradorObtido = new Administrador();
             if (resultado != null) {
                 while (resultado.next()) {
-                    AdministradorObtido.setId(Integer.parseInt(resultado.getString("ID")));
-                    AdministradorObtido.setNome(resultado.getString("NOME"));
-                    AdministradorObtido.setCpf(resultado.getString("CPF"));
-                    AdministradorObtido.setEndereco(resultado.getString("ENDERECO"));
-                    AdministradorObtido.setSenha(resultado.getString("SENHA"));
+                    Administrador.setId(Integer.parseInt(resultado.getString("ID")));
+                    Administrador.setNome(resultado.getString("NOME"));
+                    Administrador.setCpf(resultado.getString("CPF"));
+                    Administrador.setEndereco(resultado.getString("ENDERECO"));
+                    Administrador.setSenha(resultado.getString("SENHA"));
                 }
             }
-            return AdministradorObtido;
+            else{
+                return Administrador = null;
+            }
+            return Administrador;
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
