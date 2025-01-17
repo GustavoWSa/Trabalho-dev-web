@@ -67,6 +67,7 @@ public class AutenticaController extends HttpServlet {
                         request.getSession().setAttribute("authUser", administradorObtido);
                         rd = request.getRequestDispatcher("/views/professor/lancarNota.jsp");
                         rd.forward(request, response);
+                        //sessionStorage.setItem("Role", "admin");
                         
                     }
                     else {

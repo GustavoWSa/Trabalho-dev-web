@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import entidade.Administrador;
 import java.sql.Connection;
+import java.util.HashSet;
 
 /*
 -- Estrutura da tabela `Administradors`
@@ -144,6 +145,8 @@ public class AdministradorDAO implements Dao<Administrador> {
                     Administrador.setCpf(resultado.getString("CPF"));
                     Administrador.setAprovado(resultado.getString("APROVADO"));
                     Administrador.setSenha(resultado.getString("SENHA"));
+                    
+                    
                 }
             }
             else{

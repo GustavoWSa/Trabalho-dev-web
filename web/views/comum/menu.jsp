@@ -30,7 +30,7 @@
                             <!-- Opções para usuário não autenticado -->
                             <a class="nav-link" href="/aplicacaoMVC/MostrarComentarios">Comentários</a>
                             <a class="nav-link" href="/aplicacaoMVC/AutenticaController?acao=Login">Login admin</a>
-                            <a class="nav-link" href="/aplicacaoMVC/AutenticaProfessorController?acao=Login">Login professor</a>
+                            
                 <%    }
                     } %>
             </div>
