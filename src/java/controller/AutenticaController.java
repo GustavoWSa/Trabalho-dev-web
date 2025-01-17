@@ -58,11 +58,23 @@ public class AutenticaController extends HttpServlet {
                 professorObtido = ProfessorDAO.Logar(cpf_user, senha_user);
                 AlunoDAO AlunoDAO = new AlunoDAO();
                 Aluno alunoObtido;
+                System.out.println(administradorObtido);
+                System.out.println(administradorObtido.getAprovado());
+                System.out.println(administradorObtido.getNome());
                 alunoObtido = AlunoDAO.Logar(cpf_user, senha_user);
                 if (administradorObtido != null){
-                    request.getSession().setAttribute("authUser", administradorObtido);
-                    rd = request.getRequestDispatcher("/views/professor/lancarNota.jsp");
-                    rd.forward(request, response);
+                    if (administradorObtido.getAprovado().contentEquals("s")){
+                        request.getSession().setAttribute("authUser", administradorObtido);
+                        rd = request.getRequestDispatcher("/views/professor/lancarNota.jsp");
+                        rd.forward(request, response);
+                        
+                    }
+                    else {
+                        throw new RuntimeException("Administrador nao autorizado");
+                        
+                    }
+                        
+                    
                 }else if(professorObtido != null){
                     
                     request.getSession().setAttribute("authUser", professorObtido);
@@ -77,7 +89,7 @@ public class AutenticaController extends HttpServlet {
                 
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                throw new RuntimeException("Falha na query para Logar");
+                throw new RuntimeException(ex.getMessage());
             }
 
             
