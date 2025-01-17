@@ -20,6 +20,7 @@ public class Aluno {
     private String cpf; 
     private String senha;
     private String endereco;
+    
 
     
     public String getEmail() {
@@ -142,7 +143,5 @@ public class Aluno {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-
     
 }

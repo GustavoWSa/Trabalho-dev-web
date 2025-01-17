@@ -8,6 +8,7 @@ public class Administrador {
     private String senha;
     private String aprovado;
     private String endereco;
+    private String role;
     
     
 
@@ -87,5 +88,5 @@ public class Administrador {
     public void setAprovado(String aprovado) {
         this.aprovado = aprovado;
     }
-
+   
 }
