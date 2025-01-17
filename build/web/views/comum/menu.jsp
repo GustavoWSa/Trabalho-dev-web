@@ -11,8 +11,8 @@
                     // Testar se está logado
                     HttpSession sessao = request.getSession(false);
                     if (sessao != null) {
-                        Administrador administradorLogado = (Administrador) session.getAttribute("administrador");
-                        Professor professorLogado = (Professor) session.getAttribute("professor");
+                        Administrador administradorLogado = (Administrador) session.getAttribute("authUserAdmin");
+                        Professor professorLogado = (Professor) session.getAttribute("authUserProfessor");
                         
                         if (administradorLogado != null) { %>
                             <!-- Opções do menu para Administrador -->
@@ -25,11 +25,12 @@
                             <a class="nav-link" href="/aplicacaoMVC/admin/logOut">Logout</a>
                 <%  } else if (professorLogado != null) { %>
                             <!-- Opções do menu para Professor -->
+                            <a class="nav-link" href="/aplicacaoMVC/professor/lancarNota">Lancar nota</a>
                             
                 <%  } else { %>
                             <!-- Opções para usuário não autenticado -->
                             <a class="nav-link" href="/aplicacaoMVC/MostrarComentarios">Comentários</a>
-                            <a class="nav-link" href="/aplicacaoMVC/AutenticaController?acao=Login">Login admin</a>
+                            <a class="nav-link" href="/aplicacaoMVC/AutenticaController?acao=Login">Login</a>
                             
                 <%    }
                     } %>
