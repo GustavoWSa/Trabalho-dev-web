@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.AdministradorDAO;
+import model.ProfessorDAO;
+import model.AlunoDAO;
 
 /**
  *
@@ -43,29 +45,28 @@ public class AutenticaController extends HttpServlet {
             rd.forward(request, response);
 
         } else {
-            Administrador administradorObtido;
-            Administrador administrador = new Administrador(cpf_user, senha_user);
-            AdministradorDAO AdministradorDAO = new AdministradorDAO();
+            
+            
             try {
-                administradorObtido = AdministradorDAO.Logar(administrador);
+                AdministradorDAO AdministradorDAO = new AdministradorDAO();
+                Administrador administradorObtido;
+                administradorObtido = AdministradorDAO.Logar(cpf_user, senha_user);
+                ProfessorDAO ProfessorDAO = new ProfessorDAO();
+                //Professor professorObtido;
+                //professorObtido = ProfessorDAO.Logar(cpf_user, senha_user);
+                if (administradorObtido != null){
+                    request.getSession().setAttribute("authUser", administradorObtido);
+                    rd = request.getRequestDispatcher("/views/professor/lancarNota.jsp");
+                    rd.forward(request, response);
+                }
+                
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
                 throw new RuntimeException("Falha na query para Logar");
             }
 
-            if (administradorObtido.getId() != 0) {
-                HttpSession session = request.getSession();
-                session.setAttribute("administrador", administradorObtido);
-
-                rd = request.getRequestDispatcher("/admin/dashboard");
-                rd.forward(request, response);
-
-            } else {
-                request.setAttribute("msgError", "Usuário e/ou senha incorreto");
-                rd = request.getRequestDispatcher("/views/autenticacao/formLogin.jsp");
-                rd.forward(request, response);
-
-            }
+            
+             
         }
     }
 
