@@ -150,24 +150,27 @@ public class ProfessorDAO implements Dao<Professor> {
         return meusProfessores;
     }
 
-    public Professor Logar(Professor Professor) throws Exception {
+    public Professor Logar(String CPF, String Senha) throws Exception {
         Conexao conexao = new Conexao();
+        Professor Professor = new Professor();
         try {
             PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM Professores WHERE cpf=? and senha =? LIMIT 1");
-            sql.setString(1, Professor.getCpf());
-            sql.setString(2, Professor.getSenha());
+            sql.setString(1, CPF);
+            sql.setString(2, Senha);
             ResultSet resultado = sql.executeQuery();
-            Professor ProfessorObtido = new Professor();
             if (resultado != null) {
                 while (resultado.next()) {
-                    ProfessorObtido.setId(Integer.parseInt(resultado.getString("ID")));
-                    ProfessorObtido.setNome(resultado.getString("NOME"));
-                    ProfessorObtido.setCpf(resultado.getString("CPF"));
-                    ProfessorObtido.setNome(resultado.getString("NOME"));
-                    ProfessorObtido.setSenha(resultado.getString("SENHA"));
+                    Professor.setId(Integer.parseInt(resultado.getString("ID")));
+                    Professor.setNome(resultado.getString("NOME"));
+                    Professor.setCpf(resultado.getString("CPF"));
+                    Professor.setEmail(resultado.getString("EMAIL"));
+                    Professor.setSenha(resultado.getString("SENHA"));
                 }
             }
-            return ProfessorObtido;
+            else{
+                return Professor = null;
+            }
+            return Professor;
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
