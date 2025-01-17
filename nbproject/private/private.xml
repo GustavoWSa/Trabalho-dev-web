@@ -17,6 +17,7 @@
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/entidade/Categoria.java</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/relatorio.jsp</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/entidade/Professor.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/HomeController.java</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/index.jsp</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/entidade/Aluno.java</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/model/TurmaDAO.java</file>
@@ -24,7 +25,6 @@
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/entidade/Comentario.java</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/filtro/filtroProfessor.java</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/filtro/filtroRestrito.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/autenticacao/formLoginProfessor.jsp</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/listaAdmins.jsp</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/admin/Turmas/listaTurma.jsp</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/AutenticaController.java</file>

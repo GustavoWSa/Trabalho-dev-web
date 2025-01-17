@@ -58,14 +58,16 @@ public class AutenticaController extends HttpServlet {
                 professorObtido = ProfessorDAO.Logar(cpf_user, senha_user);
                 AlunoDAO AlunoDAO = new AlunoDAO();
                 Aluno alunoObtido;
+                
                 System.out.println(administradorObtido);
                 System.out.println(administradorObtido.getAprovado());
                 System.out.println(administradorObtido.getNome());
+                System.out.println(administradorObtido.getRole());
                 alunoObtido = AlunoDAO.Logar(cpf_user, senha_user);
-                if (administradorObtido != null){
+                if (administradorObtido.getNome() != null && !administradorObtido.getNome().trim().isEmpty()){
                     if (administradorObtido.getAprovado().contentEquals("s")){
-                        request.getSession().setAttribute("authUser", administradorObtido);
-                        rd = request.getRequestDispatcher("/views/professor/lancarNota.jsp");
+                        request.getSession().setAttribute("authUserAdmin", administradorObtido);
+                        rd = request.getRequestDispatcher("/views/public/home.jsp");
                         rd.forward(request, response);
                         //sessionStorage.setItem("Role", "admin");
                         
@@ -77,14 +79,16 @@ public class AutenticaController extends HttpServlet {
                     }
                         
                     
-                }else if(professorObtido != null){
+                }
+                else if(professorObtido != null){
                     
-                    request.getSession().setAttribute("authUser", professorObtido);
+                    request.getSession().setAttribute("authUserProfessor", professorObtido);
                     rd = request.getRequestDispatcher("/views/professor/lancarNota.jsp");
                     rd.forward(request, response);
-                }else if(alunoObtido != null){
+                }
+                else if(alunoObtido != null){
                     
-                    request.getSession().setAttribute("authUser", alunoObtido);
+                    request.getSession().setAttribute("authUserAluno", alunoObtido);
                     rd = request.getRequestDispatcher("/views/professor/lancarNota.jsp");
                     rd.forward(request, response);
                 }

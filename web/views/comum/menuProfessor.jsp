@@ -13,11 +13,8 @@
                     if (sessao != null) {
                         Professor ProfessorLogado = (Professor) session.getAttribute("professor");
                         if (ProfessorLogado != null) { %>
-                            <a class="nav-link" href="/aplicacaoMVC/admin/dashboard">Dashboard</a>
-                            <a class="nav-link" href="/aplicacaoMVC/admin/CategoriaController?acao=Listar">Categorias</a>
-                            <a class="nav-link" href="/aplicacaoMVC/admin/DisciplinaController?acao=Listar">Disciplinas</a>
-                            <a class="nav-link" href="/aplicacaoMVC/admin/TurmaController?acao=Listar">Turmas</a> <!-- Link para Turmas -->
-                            <a class="nav-link" href="/aplicacaoMVC/admin/RegistrarAluno">Registrar aluno</a>
+                            <a class="nav-link" href="/aplicacaoMVC/professor/lancarNota">Lançar nota</a>
+                            
                             <a class="nav-link" href="/aplicacaoMVC/admin/ProfessorController">Professores</a> <!-- Link para Professores -->
                             <a class="nav-link" href="/aplicacaoMVC/admin/logOut">Logout</a>
                 <%  } else { %>

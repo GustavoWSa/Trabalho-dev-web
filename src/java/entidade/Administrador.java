@@ -32,6 +32,7 @@ public class Administrador {
         this.endereco = "";
         this.senha = "";
         this.aprovado="";
+        this.role = "admin";
     }
 
     public Administrador(String nome, String cpf,  String senha, String endereco) {
@@ -88,5 +89,8 @@ public class Administrador {
     public void setAprovado(String aprovado) {
         this.aprovado = aprovado;
     }
+    public String getRole() {
+    return role;
+}
    
 }
