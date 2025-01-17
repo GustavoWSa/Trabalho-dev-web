@@ -1,6 +1,8 @@
 package controller;
 
 import entidade.Administrador;
+import entidade.Professor;
+import entidade.Aluno;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,10 +54,23 @@ public class AutenticaController extends HttpServlet {
                 Administrador administradorObtido;
                 administradorObtido = AdministradorDAO.Logar(cpf_user, senha_user);
                 ProfessorDAO ProfessorDAO = new ProfessorDAO();
-                //Professor professorObtido;
-                //professorObtido = ProfessorDAO.Logar(cpf_user, senha_user);
+                Professor professorObtido;
+                professorObtido = ProfessorDAO.Logar(cpf_user, senha_user);
+                AlunoDAO AlunoDAO = new AlunoDAO();
+                Aluno alunoObtido;
+                alunoObtido = AlunoDAO.Logar(cpf_user, senha_user);
                 if (administradorObtido != null){
                     request.getSession().setAttribute("authUser", administradorObtido);
+                    rd = request.getRequestDispatcher("/views/professor/lancarNota.jsp");
+                    rd.forward(request, response);
+                }else if(professorObtido != null){
+                    
+                    request.getSession().setAttribute("authUser", professorObtido);
+                    rd = request.getRequestDispatcher("/views/professor/lancarNota.jsp");
+                    rd.forward(request, response);
+                }else if(alunoObtido != null){
+                    
+                    request.getSession().setAttribute("authUser", alunoObtido);
                     rd = request.getRequestDispatcher("/views/professor/lancarNota.jsp");
                     rd.forward(request, response);
                 }
