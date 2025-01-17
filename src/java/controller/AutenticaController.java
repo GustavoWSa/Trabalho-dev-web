@@ -70,7 +70,8 @@ public class AutenticaController extends HttpServlet {
                         
                     }
                     else {
-                        throw new RuntimeException("Administrador nao autorizado");
+                        rd = request.getRequestDispatcher("/views/erro/NaoAutorizado.jsp");
+                        rd.forward(request, response);
                         
                     }
                         
