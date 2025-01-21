@@ -56,9 +56,11 @@ public class AutenticaController extends HttpServlet {
                 ProfessorDAO ProfessorDAO = new ProfessorDAO();
                 Professor professorObtido;
                 professorObtido = ProfessorDAO.Logar(cpf_user, senha_user);
+                
                 AlunoDAO AlunoDAO = new AlunoDAO();
                 Aluno alunoObtido;
-                
+                System.out.println(professorObtido);
+                System.out.println(professorObtido.getNome());
                 System.out.println(administradorObtido);
                 System.out.println(administradorObtido.getAprovado());
                 System.out.println(administradorObtido.getNome());
@@ -83,13 +85,14 @@ public class AutenticaController extends HttpServlet {
                 else if(professorObtido != null){
                     
                     request.getSession().setAttribute("authUserProfessor", professorObtido);
-                    rd = request.getRequestDispatcher("/views/professor/lancarNota.jsp");
+                    //request.setMaxInactiveInterval(30*60);
+                    rd = request.getRequestDispatcher("/views/comum/menu.jsp");
                     rd.forward(request, response);
                 }
                 else if(alunoObtido != null){
                     
                     request.getSession().setAttribute("authUserAluno", alunoObtido);
-                    rd = request.getRequestDispatcher("/views/professor/lancarNota.jsp");
+                    rd = request.getRequestDispatcher("/views/public/home.jsp");
                     rd.forward(request, response);
                 }
                 

@@ -40,18 +40,18 @@ public class RegistrarAluno extends HttpServlet {
             case "Alterar":
                 int idAlterar = Integer.parseInt(request.getParameter("id"));
             try {
-            Aluno alunoParaAlterar = alunoDAO.get(idAlterar);
-            request.setAttribute("aluno", alunoParaAlterar);
-            request.setAttribute("acao", "Alterar");
-            request.setAttribute("msgError", "");
-            } catch (Exception e) {
-            System.out.println("Erro ao buscar aluno para alteração: " + e.getMessage());
-            request.setAttribute("msgError", "Falha ao carregar dados do aluno.");
-            }
+                Aluno alunoParaAlterar = alunoDAO.get(idAlterar);
+                request.setAttribute("aluno", alunoParaAlterar);
+                request.setAttribute("acao", "Alterar");
+                request.setAttribute("msgError", "");
+                } catch (Exception e) {
+                System.out.println("Erro ao buscar aluno para alteração: " + e.getMessage());
+                request.setAttribute("msgError", "Falha ao carregar dados do aluno.");
+                }
 
-            RequestDispatcher rdAlterar = request.getRequestDispatcher("/views/admin/Alunos/formRegistrarAluno.jsp");
-            rdAlterar.forward(request, response);
-            break;
+                RequestDispatcher rdAlterar = request.getRequestDispatcher("/views/admin/Alunos/formRegistrarAluno.jsp");
+                rdAlterar.forward(request, response);
+                break;
             case "Excluir":
                 // get parametro ação indicando sobre qual categoria será a ação
                 // Captura o ID do aluno a ser excluído

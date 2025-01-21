@@ -25,8 +25,8 @@
                             <a class="nav-link" href="/aplicacaoMVC/admin/logOut">Logout</a>
                 <%  } else if (professorLogado != null) { %>
                             <!-- Opções do menu para Professor -->
-                            <a class="nav-link" href="/aplicacaoMVC/professor/lancarNota">Lancar nota</a>
-                            
+                            <a class="nav-link" href="/aplicacaoMVC/professor/TurmaController?acao=ListarTurmasProfessor">Lancar nota</a>
+                            <a class="nav-link" href="/aplicacaoMVC/admin/TurmaController?acao=ListarTurmasProfessor">Turmas</a>
                 <%  } else { %>
                             <!-- Opções para usuário não autenticado -->
                             <a class="nav-link" href="/aplicacaoMVC/MostrarComentarios">Comentários</a>

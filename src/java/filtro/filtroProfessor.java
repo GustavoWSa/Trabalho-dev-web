@@ -11,8 +11,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebFilter(filterName = "filtroRestrito", urlPatterns = {"/Professor/*"})
+@WebFilter(filterName = "filtroProfessor", urlPatterns = {"/professor/*"})
 public class filtroProfessor implements Filter {
 
     @Override
@@ -20,14 +21,24 @@ public class filtroProfessor implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
 
-        Professor professor = (Professor)((HttpServletRequest) request).getSession().getAttribute("professor");
-
-        if ((professor != null) && (!((String) professor.getNome()).isEmpty())) {
-            chain.doFilter(request, response);
+        HttpSession session = ((HttpServletRequest) request).getSession(false);
+        if (session != null) {
+            System.out.println("Session ID: " + session.getId());
+            Professor professor = (Professor) session.getAttribute("authUserProfessor");
+            if (professor != null && !((String) professor.getNome()).isEmpty()) {
+                chain.doFilter(request, response);
+                System.out.println("Professor: " + professor.getNome());
+            } else {
+                System.out.println("Professor not logged in.");
+                ((HttpServletResponse) response).sendRedirect("/aplicacaoMVC/AutenticaController?acao=Login");
+            }
         } else {
-            ((HttpServletResponse) response).sendRedirect("http://localhost:8080/aplicacaoMVC/home");
+            System.out.println("Session is null.");
+            ((HttpServletResponse) response).sendRedirect("/aplicacaoMVC/AutenticaController?acao=Login");
         }
     }
+
+
     @Override
     public void init(FilterConfig arg0) throws ServletException {
     }
