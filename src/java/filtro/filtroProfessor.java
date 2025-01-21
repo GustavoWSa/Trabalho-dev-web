@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(filterName = "filtroProfessor", urlPatterns = {"/professor/*"})
+//@WebFilter(filterName = "filtroProfessor", urlPatterns = {"/professor/*"})
 public class filtroProfessor implements Filter {
 
     @Override

@@ -15,7 +15,11 @@
                         Professor professorLogado = (Professor) session.getAttribute("authUserProfessor");
                         
                         if (administradorLogado != null) { %>
-                            <!-- Opções do menu para Administrador -->
+                            <!-- Opções do menu para Administrador 
+                            <!--<= administradorLogado %>
+                            <= administradorLogado.getNome() >
+                            -->
+                            
                             <a class="nav-link" href="/aplicacaoMVC/admin/dashboard">Dashboard</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/CategoriaController?acao=Listar">Categorias</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/DisciplinaController?acao=Listar">Disciplinas</a>
@@ -24,7 +28,10 @@
                             <a class="nav-link" href="/aplicacaoMVC/admin/ProfessorController">Professores</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/logOut">Logout</a>
                 <%  } else if (professorLogado != null) { %>
-                            <!-- Opções do menu para Professor -->
+                            <!-- Opções do menu para Professor 
+                            <= professorLogado %>
+                            <= professorLogado.getNome() >
+                            -->
                             <a class="nav-link" href="/aplicacaoMVC/professor/TurmaController?acao=ListarTurmasProfessor">Lancar nota</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/TurmaController?acao=ListarTurmasProfessor">Turmas</a>
                 <%  } else { %>

@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(name = "TurmaController", urlPatterns = {"/admin/TurmaController"})
-public class TurmaController extends HttpServlet {
+//@WebServlet(name = "TurmaController", urlPatterns = {"/admin/TurmaController"})
+//public class TurmaController extends HttpServlet {
 
    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

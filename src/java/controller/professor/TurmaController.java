@@ -39,25 +39,27 @@ public class TurmaController extends HttpServlet {
                 break;
 
             case "ListarTurmasProfessor":
-            HttpSession session = request.getSession(false); // Retrieve existing session
-            if (session != null) {
-                Professor professorLogado = (Professor) session.getAttribute("authUserProfessor");
-                if (professorLogado != null) {
-                    // Retrieve turmas mentored by the professor
-                    listaTurma = turmaDAO.getMentoradas(professorLogado.getId());
-                    request.setAttribute("listaTurma", listaTurma);
-                    rd = request.getRequestDispatcher("/views/professor/listaTurmas.jsp");
-                    System.out.println("Requested URL: " + request.getRequestURL());
-                    System.out.println("Query string: " + request.getQueryString());
+                HttpSession session = request.getSession(false); // Retrieve existing session only once
+                if (session != null) {
+                    Professor professorLogado = (Professor) session.getAttribute("authUserProfessor");
+                    if (professorLogado != null) {
+                        // Retrieve turmas mentored by the professor
+                        System.out.println("Professor ID: " + professorLogado.getId());
+                        listaTurma = turmaDAO.getMentoradas(professorLogado.getId());
+                        request.setAttribute("listaTurma", listaTurma);
+                        rd = request.getRequestDispatcher("/views/professor/listaTurmas.jsp");
+                        System.out.println("Requested URL: " + request.getRequestURL());
+                        System.out.println("Query string: " + request.getQueryString());
 
-                    rd.forward(request, response);
+                        rd.forward(request, response);
+                    } else {
+                        response.sendRedirect("/aplicacaoMVC/AutenticaController?acao=Login");
+                    }
                 } else {
                     response.sendRedirect("/aplicacaoMVC/AutenticaController?acao=Login");
                 }
-            } else {
-                response.sendRedirect("/aplicacaoMVC/AutenticaController?acao=Login");
-            }
-            break;
+                break;
+
 
 
             case "Alterar":
@@ -91,6 +93,7 @@ public class TurmaController extends HttpServlet {
         }
     }
 
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -98,6 +101,7 @@ public class TurmaController extends HttpServlet {
         TurmaDAO turmaDAO = new TurmaDAO();
 
         try {
+            // Get the parameters for the turma update
             int id = Integer.parseInt(request.getParameter("id"));
             int professorId = Integer.parseInt(request.getParameter("professor_id"));
             int disciplinaId = Integer.parseInt(request.getParameter("disciplina_id"));
@@ -112,7 +116,7 @@ public class TurmaController extends HttpServlet {
                     turmaDAO.insert(turma);
                     break;
                 case "Alterar":
-                    turmaDAO.update(turma);
+                    turmaDAO.update(turma); // Updates the nota here
                     break;
                 case "Excluir":
                     turmaDAO.delete(turma.getId());
@@ -127,4 +131,5 @@ public class TurmaController extends HttpServlet {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Erro ao processar a operação.");
         }
     }
-}
+    }
+
