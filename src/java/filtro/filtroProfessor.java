@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-//@WebFilter(filterName = "filtroProfessor", urlPatterns = {"/professor/*"})
+@WebFilter(filterName = "filtroProfessor", urlPatterns = {"/professor/*"})
 public class filtroProfessor implements Filter {
 
     @Override
@@ -29,11 +29,11 @@ public class filtroProfessor implements Filter {
                 chain.doFilter(request, response);
                 System.out.println("Professor: " + professor.getNome());
             } else {
-                System.out.println("Professor not logged in.");
+                System.out.println("Professor nao logado.");
                 ((HttpServletResponse) response).sendRedirect("/aplicacaoMVC/AutenticaController?acao=Login");
             }
         } else {
-            System.out.println("Session is null.");
+            System.out.println("Sessao e null.");
             ((HttpServletResponse) response).sendRedirect("/aplicacaoMVC/AutenticaController?acao=Login");
         }
     }

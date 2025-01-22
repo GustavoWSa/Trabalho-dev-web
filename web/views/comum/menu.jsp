@@ -33,7 +33,7 @@
                             <= professorLogado.getNome() >
                             -->
                             <a class="nav-link" href="/aplicacaoMVC/professor/TurmaController?acao=ListarTurmasProfessor">Lancar nota</a>
-                            <a class="nav-link" href="/aplicacaoMVC/admin/TurmaController?acao=ListarTurmasProfessor">Turmas</a>
+                            <a class="nav-link" href="/aplicacaoMVC/professor/logOut Professor">Logout</a>
                 <%  } else { %>
                             <!-- Opções para usuário não autenticado -->
                             <a class="nav-link" href="/aplicacaoMVC/MostrarComentarios">Comentários</a>

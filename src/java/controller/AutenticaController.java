@@ -86,6 +86,7 @@ public class AutenticaController extends HttpServlet {
                     
                     request.getSession().setAttribute("authUserProfessor", professorObtido);
                     //request.setMaxInactiveInterval(30*60);
+                    request.removeAttribute("authUserAdmin");
                     rd = request.getRequestDispatcher("/views/comum/menu.jsp");
                     rd.forward(request, response);
                 }

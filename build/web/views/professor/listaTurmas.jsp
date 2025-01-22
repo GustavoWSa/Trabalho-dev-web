@@ -25,11 +25,19 @@
                 <table class="table table-bordered table-striped table-hover">
                     <thead class="table-dark">
                         <tr>
-                            <th>ID</th>
+                            <!-- <th>ID</th>
                             <th>Código da Turma</th>
                             <th>Disciplina</th>
                             <th>Nota</th>
-                            <th>Ações</th>
+                            <th>Ações</th>< -->
+                            <th scope="col">Id</th>
+                            <th scope="col">Código da Turma</th>
+                            <th scope="col">Disciplina</th>
+                            <th scope="col">Id aluno</<th>
+                            <th scope="col">Nota</th>
+                            <th scope="col">Ações</th>
+                            
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -40,16 +48,16 @@
                             <td><%= turma.getId() %></td>
                             <td><%= turma.getCodigoTurma() %></td>
                             <td><%= turma.getDisciplina_id() %></td>
+                            <<td><%= turma.getAluno_id() %></td>
                             <td><%= turma.getNota() %></td>
                             <td>
                                 <!-- Button to trigger modal to update nota -->
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#updateNotaModal<%= turma.getId() %>">
-                                    Atualizar Nota
-                                </button>
+                                <a href="/aplicacaoMVC/professor/TurmaController?acao=Alterar&id=<%=turma.getId()%>" class="btn btn-warning">Alterar</a>
+                                <a href="/aplicacaoMVC/admin/TurmaController?acao=Excluir&id=<%=turma.getId()%>" class="btn btn-danger">Excluir</a>
                             </td>
                         </tr>
 
-                        <!-- Modal for updating nota -->
+                        <!-- Modal for updating nota --
                         <div class="modal fade" id="updateNotaModal<%= turma.getId() %>" tabindex="-1" aria-labelledby="updateNotaModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -64,13 +72,13 @@
                                                 <input type="number" class="form-control" id="nota" name="nota" value="<%= turma.getNota() %>" required>
                                             </div>
                                             <input type="hidden" name="id" value="<%= turma.getId() %>">
-                                            <input type="hidden" name="acao" value="Alterar"> <!-- Existing action to handle the update -->
+                                            <input type="hidden" name="acao" value="Alterar"> <!-- Existing action to handle the update --
                                             <button type="submit" class="btn btn-primary">Salvar</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <% 
                             }
                         %>

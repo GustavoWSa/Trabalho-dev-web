@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//@WebFilter(filterName = "filtroRestrito", urlPatterns = {"/admin/*"})
+@WebFilter(filterName = "filtroRestrito", urlPatterns = {"/admin/*"})
 public class filtroRestrito implements Filter {
 
     @Override
@@ -20,8 +20,9 @@ public class filtroRestrito implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
 
-        Administrador administrador = (Administrador)((HttpServletRequest) request).getSession().getAttribute("administrador");
-
+        Administrador administrador = (Administrador)((HttpServletRequest) request).getSession(false).getAttribute("authUserAdmin");
+        System.out.println("Admin: " + administrador.getNome());
+        System.out.println("Id admin: " + administrador.getId());
         if ((administrador != null) && (!((String) administrador.getNome()).isEmpty())) {
             chain.doFilter(request, response);
         } else {
