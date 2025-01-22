@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" import="entidade.Administrador, entidade.Professor" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="entidade.Administrador, entidade.Professor, entidade.Aluno" %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="/aplicacaoMVC/home">Home</a>
@@ -13,6 +13,7 @@
                     if (sessao != null) {
                         Administrador administradorLogado = (Administrador) session.getAttribute("authUserAdmin");
                         Professor professorLogado = (Professor) session.getAttribute("authUserProfessor");
+                        Aluno alunoLogado = (Aluno) session.getAttribute("authUserAluno");
                         
                         if (administradorLogado != null) { %>
                             <!-- Opções do menu para Administrador 
@@ -34,6 +35,9 @@
                             -->
                             <a class="nav-link" href="/aplicacaoMVC/professor/TurmaController?acao=ListarTurmasProfessor">Lancar nota</a>
                             <a class="nav-link" href="/aplicacaoMVC/professor/logOut Professor">Logout</a>
+                <%  } else if (alunoLogado != null) { %>
+                            <a class="nav-link" href="/aplicacaoMVC/aluno/TurmaAluno?acao=ListarTurmasAluno">Ver notas</a>
+                            <a class="nav-link" href="/aplicacaoMVC/aluno/logOutAluno">Logout</a>
                 <%  } else { %>
                             <!-- Opções para usuário não autenticado -->
                             <a class="nav-link" href="/aplicacaoMVC/MostrarComentarios">Comentários</a>

@@ -66,7 +66,8 @@ public class AutenticaController extends HttpServlet {
                 System.out.println(administradorObtido.getAprovado());
                 System.out.println(administradorObtido.getNome());
                 System.out.println(administradorObtido.getRole());
-                
+                System.out.println(alunoObtido);
+                System.out.println(alunoObtido.getNome());
                 if (administradorObtido.getNome() != null && !administradorObtido.getNome().trim().isEmpty()){
                     if (administradorObtido.getAprovado().contentEquals("s")){
                         request.getSession().setAttribute("authUserAdmin", administradorObtido);
@@ -83,7 +84,7 @@ public class AutenticaController extends HttpServlet {
                         
                     
                 }
-                else if(professorObtido != null){
+                else if(professorObtido != null && !professorObtido.getNome().trim().isEmpty()){
                     
                     request.getSession().setAttribute("authUserProfessor", professorObtido);
                     //request.setMaxInactiveInterval(30*60);
@@ -94,8 +95,9 @@ public class AutenticaController extends HttpServlet {
                 else if(alunoObtido != null){
                     
                     request.getSession().setAttribute("authUserAluno", alunoObtido);
+                    request.removeAttribute("authUserProfessor");
                     request.removeAttribute("authUserAdmin");
-                    rd = request.getRequestDispatcher("/views/public/home.jsp");
+                    rd = request.getRequestDispatcher("/views/comum/menu.jsp");
                     rd.forward(request, response);
                 }
                 
