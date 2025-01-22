@@ -59,13 +59,14 @@ public class AutenticaController extends HttpServlet {
                 
                 AlunoDAO AlunoDAO = new AlunoDAO();
                 Aluno alunoObtido;
+                alunoObtido = AlunoDAO.Logar(cpf_user, senha_user);
                 System.out.println(professorObtido);
                 System.out.println(professorObtido.getNome());
                 System.out.println(administradorObtido);
                 System.out.println(administradorObtido.getAprovado());
                 System.out.println(administradorObtido.getNome());
                 System.out.println(administradorObtido.getRole());
-                alunoObtido = AlunoDAO.Logar(cpf_user, senha_user);
+                
                 if (administradorObtido.getNome() != null && !administradorObtido.getNome().trim().isEmpty()){
                     if (administradorObtido.getAprovado().contentEquals("s")){
                         request.getSession().setAttribute("authUserAdmin", administradorObtido);
@@ -93,6 +94,7 @@ public class AutenticaController extends HttpServlet {
                 else if(alunoObtido != null){
                     
                     request.getSession().setAttribute("authUserAluno", alunoObtido);
+                    request.removeAttribute("authUserAdmin");
                     rd = request.getRequestDispatcher("/views/public/home.jsp");
                     rd.forward(request, response);
                 }
