@@ -53,7 +53,7 @@
                             <td>
                                 <!-- Button to trigger modal to update nota -->
                                 <a href="/aplicacaoMVC/professor/TurmaController?acao=Alterar&id=<%=turma.getId()%>" class="btn btn-warning">Alterar</a>
-                                <a href="/aplicacaoMVC/admin/TurmaController?acao=Excluir&id=<%=turma.getId()%>" class="btn btn-danger">Excluir</a>
+                                
                             </td>
                         </tr>
 
