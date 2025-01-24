@@ -24,7 +24,7 @@ public class TurmaController extends HttpServlet {
         RequestDispatcher rd;
 
         if (acao == null) {
-            acao = "ListarTurmasProfessor";
+            acao = "Listar";
         }
 
         switch (acao) {
