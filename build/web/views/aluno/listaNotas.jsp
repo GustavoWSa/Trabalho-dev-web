@@ -25,11 +25,7 @@
                 <table class="table table-bordered table-striped table-hover">
                     <thead class="table-dark">
                         <tr>
-                            <!-- <th>ID</th>
-                            <th>Código da Turma</th>
-                            <th>Disciplina</th>
-                            <th>Nota</th>
-                            <th>Ações</th>< -->
+                            
                             <th scope="col">Id</th>
                             <th scope="col">Código da Turma</th>
                             <th scope="col">Disciplina</th>
@@ -53,28 +49,7 @@
                             
                         </tr>
 
-                        <!-- Modal for updating nota --
-                        <div class="modal fade" id="updateNotaModal<%= turma.getId() %>" tabindex="-1" aria-labelledby="updateNotaModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="updateNotaModalLabel">Atualizar Nota</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="/professor/TurmaController" method="POST">
-                                            <div class="mb-3">
-                                                <label for="nota" class="form-label">Nova Nota</label>
-                                                <input type="number" class="form-control" id="nota" name="nota" value="<%= turma.getNota() %>" required>
-                                            </div>
-                                            <input type="hidden" name="id" value="<%= turma.getId() %>">
-                                            <input type="hidden" name="acao" value="Alterar"> <!-- Existing action to handle the update --
-                                            <button type="submit" class="btn btn-primary">Salvar</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+                       
                         <% 
                             }
                         %>

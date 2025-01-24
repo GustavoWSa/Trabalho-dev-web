@@ -26,7 +26,7 @@
                     <h1>Área Restrita</h1>
                     <h2>Lista de Turmas</h2>
 
-                    <a href="/aplicacaoMVC/admin/TurmaController?acao=Incluir" class="mb-2 btn btn-primary">Incluir</a>
+                    <a href="/aplicacaoMVC/admin/TurmaC?acao=Incluir" class="mb-2 btn btn-primary">Incluir</a>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -53,8 +53,8 @@
                                         out.println("<td>" + turma.getNota() + "</td>");   
                                 %>
                                 <td>
-                                    <a href="/aplicacaoMVC/admin/TurmaController?acao=Alterar&id=<%=turma.getId()%>" class="btn btn-warning">Alterar</a>
-                                    <a href="/aplicacaoMVC/admin/TurmaController?acao=Excluir&id=<%=turma.getId()%>" class="btn btn-danger">Excluir</a>
+                                    <a href="/aplicacaoMVC/admin/TurmaC?acao=Alterar&id=<%=turma.getId()%>" class="btn btn-warning">Alterar</a>
+                                    <a href="/aplicacaoMVC/admin/TurmaC?acao=Excluir&id=<%=turma.getId()%>" class="btn btn-danger">Excluir</a>
                                 </td>
                                 <%
                                         out.println("</tr>");
@@ -72,7 +72,7 @@
                 <h1>Área Restrita</h1>
                 <h2>Lista de Turmas</h2>
 
-                <a href="/aplicacaoMVC/professor/TurmaController?acao=Incluir" class="mb-2 btn btn-primary">Incluir</a>
+                <a href="/aplicacaoMVC/professor/TurmaC?acao=Incluir" class="mb-2 btn btn-primary">Incluir</a>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
@@ -99,8 +99,8 @@
                                     out.println("<td>" + turma.getNota() + "</td>");   
                             %>
                             <td>
-                                <a href="/aplicacaoMVC/professor/TurmaController?acao=Alterar&id=<%=turma.getId()%>" class="btn btn-warning">Alterar</a>
-                                <a href="/aplicacaoMVC/professor/TurmaController?acao=Excluir&id=<%=turma.getId()%>" class="btn btn-danger">Excluir</a>
+                                <a href="/aplicacaoMVC/professor/TurmaC?acao=Alterar&id=<%=turma.getId()%>" class="btn btn-warning">Alterar</a>
+                                <a href="/aplicacaoMVC/professor/TurmaC?acao=Excluir&id=<%=turma.getId()%>" class="btn btn-danger">Excluir</a>
                             </td>
                             <%
                                     out.println("</tr>");

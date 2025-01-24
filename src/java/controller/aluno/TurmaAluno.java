@@ -5,6 +5,7 @@ import entidade.Professor;
 import model.TurmaDAO;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,9 +25,7 @@ public class TurmaAluno extends HttpServlet {
         TurmaDAO turmaDAO = new TurmaDAO();
         RequestDispatcher rd;
 
-        if (acao == null) {
-            acao = "ListarTurmasAluno";
-        }
+        
 
         switch (acao) {
             case "Listar":
@@ -39,13 +38,13 @@ public class TurmaAluno extends HttpServlet {
                 rd.forward(request, response);
                 break;
 
-            case "ListarTurmasAluno":
-                HttpSession session = request.getSession(false); // Retrieve existing session only once
+            case "ListarTurmasAluno": //Turmas mentoradas por professor
+                HttpSession session = request.getSession(false); 
                 if (session != null) {
                     Professor professorLogado = (Professor) session.getAttribute("authUserProfessor");
                     Aluno alunoLogado = (Aluno) session.getAttribute("authUserAluno");
                     if (alunoLogado != null) {
-                        // Retrieve turmas mentored by the professor
+                        // Retorna turmas mentoradas pelo professor
                         System.out.println("Aluno ID: " + alunoLogado.getId());
                         listaTurma = turmaDAO.getMatriculadas(alunoLogado.getId());
                         request.setAttribute("listaTurma", listaTurma);
@@ -62,7 +61,23 @@ public class TurmaAluno extends HttpServlet {
                 }
                 break;
 
+            case "ListarAbertas":
+                // Obtém as turmas que ainda têm menos de dois alunos
+                listaTurma = turmaDAO.getTurmasAbertas();
 
+                // Garante que a lista não seja nula
+                if (listaTurma == null) {
+                    listaTurma = new ArrayList<>();
+                }
+
+                // Adiciona a lista de turmas abertas como atributo na requisição
+                request.setAttribute("listaTurma", listaTurma);
+
+                // Encaminha para a página JSP de listagem de turmas
+                rd = request.getRequestDispatcher("/views/aluno/InscricaoTurma.jsp");
+                rd.forward(request, response);
+                break;
+       
 
             case "Alterar":
                 try {
@@ -97,41 +112,59 @@ public class TurmaAluno extends HttpServlet {
 
     
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String btEnviar = request.getParameter("btEnviar");
-        TurmaDAO turmaDAO = new TurmaDAO();
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    String acao = request.getParameter("acao");
+    TurmaDAO turmaDAO = new TurmaDAO();
 
-        try {
-            // Get the parameters for the turma update
-            int id = Integer.parseInt(request.getParameter("id"));
-            int professorId = Integer.parseInt(request.getParameter("professor_id"));
-            int disciplinaId = Integer.parseInt(request.getParameter("disciplina_id"));
-            int alunoId = Integer.parseInt(request.getParameter("aluno_id"));
-            String codigoTurma = request.getParameter("codigo_turma");
-            double nota = Double.parseDouble(request.getParameter("nota"));
+    try {
+        switch (acao) {
+            case "Inscrever":
+                HttpSession session = request.getSession(false);
+                if (session != null) {
+                    // Verifica se há um aluno logado
+                    Aluno alunoLogado = (Aluno) session.getAttribute("authUserAluno");
+                    if (alunoLogado != null) {
+                        // Obtém os dados enviados pelo formulário
+                        int turmaId = Integer.parseInt(request.getParameter("id"));
+                        int professorId = Integer.parseInt(request.getParameter("professor_id"));
+                        int disciplinaId = Integer.parseInt(request.getParameter("disciplina_id"));
+                        String codigoTurma = request.getParameter("codigo_turma");
 
-            Turma turma = new Turma(id, professorId, disciplinaId, alunoId, codigoTurma, nota);
+                        // Cria a relação turma-aluno
+                        Turma turmaInscricao = new Turma();
+                        turmaInscricao.setId(turmaId);
+                        turmaInscricao.setProfessor_id(professorId);
+                        turmaInscricao.setDisciplina_id(disciplinaId);
+                        turmaInscricao.setCodigoTurma(codigoTurma);
+                        turmaInscricao.setAluno_id(alunoLogado.getId());
 
-            switch (btEnviar) {
-                case "Incluir":
-                    turmaDAO.insert(turma);
-                    break;
-                case "Alterar":
-                    turmaDAO.update(turma); // Updates the nota here
-                    break;
-                case "Excluir":
-                    turmaDAO.delete(turma.getId());
-                    break;
-                default:
-                    throw new RuntimeException("Operação desconhecida.");
-            }
+                        // Chama o método para inserir a relação no banco de dados
+                        turmaDAO.incluir(turmaInscricao);
 
-            response.sendRedirect("/professor/TurmaController?acao=Listar");
-        } catch (Exception e) {
-            System.out.println("Erro: " + e.getMessage());
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Erro ao processar a operação.");
+                        // Redireciona para a página de turmas abertas
+                        response.sendRedirect("/aplicacaoMVC/aluno/TurmaAluno?acao=ListarAbertas");
+                    } else {
+                        // Caso o aluno não esteja autenticado
+                        response.sendRedirect("/aplicacaoMVC/AutenticaController?acao=Login");
+                    }
+                } else {
+                    // Caso a sessão seja inválida
+                    response.sendRedirect("/aplicacaoMVC/AutenticaController?acao=Login");
+                }
+                break;
+
+            default:
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Ação inválida!");
+                break;
         }
+    } catch (Exception e) {
+        System.out.println("Erro ao processar ação no método POST: " + e.getMessage());
+        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Erro ao processar a requisição.");
     }
+}
+
+
+
     }
 

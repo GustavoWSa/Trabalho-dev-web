@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-//@WebServlet(name = "TurmaController", urlPatterns = {"/admin/TurmaController"})
-//public class TurmaController extends HttpServlet {
+@WebServlet(name = "TurmaC", urlPatterns = {"/admin/TurmaC"})
+public class TurmaC extends HttpServlet {
 
    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -64,7 +64,7 @@ import javax.servlet.http.HttpServletResponse;
                 request.setAttribute("msgError", "Erro ao excluir o turma: " + e.getMessage());
             }
             // Redireciona para a listagem após exclusão
-            response.sendRedirect("/aplicacaoMVC/admin/TurmaController?acao=Listar");
+            response.sendRedirect("/aplicacaoMVC/admin/TurmaC?acao=Listar");
             break;
 
 
@@ -132,7 +132,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
                     break;
             }
 
-            request.setAttribute("link", "/aplicacaoMVC/admin/TurmaController?acao=Listar");
+            request.setAttribute("link", "/aplicacaoMVC/admin/TurmaC?acao=Listar");
             rd = request.getRequestDispatcher("/views/comum/showMessage.jsp");
             rd.forward(request, response);
 

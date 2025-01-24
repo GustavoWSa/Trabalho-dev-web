@@ -35,7 +35,7 @@
                         <%= msgError%>
                     </div>
                     <% }%>
-        <form action="TurmaController" method="POST">
+        <form action="TurmaC" method="POST">
             <div class="mb-3">
                 <label for="professor_id" class="form-label">Id professor</label>
                 <input type="number" name="professor_id" class="form-control" required>
