@@ -89,7 +89,7 @@ public class AutenticaController extends HttpServlet {
                     request.getSession().setAttribute("authUserProfessor", professorObtido);
                     //request.setMaxInactiveInterval(30*60);
                     request.removeAttribute("authUserAdmin");
-                    rd = request.getRequestDispatcher("/views/comum/menu.jsp");
+                    rd = request.getRequestDispatcher("/views/public/home.jsp");
                     rd.forward(request, response);
                 }
                 else if(alunoObtido != null){
@@ -97,7 +97,7 @@ public class AutenticaController extends HttpServlet {
                     request.getSession().setAttribute("authUserAluno", alunoObtido);
                     request.removeAttribute("authUserProfessor");
                     request.removeAttribute("authUserAdmin");
-                    rd = request.getRequestDispatcher("/views/comum/menu.jsp");
+                    rd = request.getRequestDispatcher("/views/public/home.jsp");
                     rd.forward(request, response);
                 }
                 

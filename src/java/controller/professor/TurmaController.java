@@ -22,6 +22,7 @@ public class TurmaController extends HttpServlet {
         String acao = request.getParameter("acao");
         TurmaDAO turmaDAO = new TurmaDAO();
         RequestDispatcher rd;
+        System.out.println("Dentro de TurmaController doGet: " + acao);
 
         if (acao == null) {
             acao = "Listar";
