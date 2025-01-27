@@ -92,7 +92,7 @@ public class AutenticaController extends HttpServlet {
                     rd = request.getRequestDispatcher("/views/public/home.jsp");
                     rd.forward(request, response);
                 }
-                else if(alunoObtido != null){
+                else if(alunoObtido != null && !alunoObtido.getNome().trim().isEmpty()){
                     
                     request.getSession().setAttribute("authUserAluno", alunoObtido);
                     request.removeAttribute("authUserProfessor");

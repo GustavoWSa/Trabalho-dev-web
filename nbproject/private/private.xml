@@ -8,9 +8,13 @@
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/nbproject/private/private.xml</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/comum/menu.jsp</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/comum/showMessage.jsp</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/META-INF/context.xml</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/admin/Alunos/formRegistrarAluno.jsp</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/filtro/filtroRestrito.java</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/admin/LogoutController.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/admin/Turmas/listaTurma.jsp</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/AutenticaController.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/admin/TurmaC.java</file>
         </group>
     </open-files>
 </project-private>

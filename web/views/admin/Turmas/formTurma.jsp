@@ -50,8 +50,8 @@
                 <input type="number" name="aluno_id" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label for="codigoTurma" class="form-label">codigoTurma</label>
-                <input type="text" name="codigoTurma" class="form-control" required>
+                <label for="codigo_turma" class="form-label">codigo_turma</label>
+                <input type="text" name="codigo_turma" class="form-control" required>
             </div>
             <div class="mb-3">
                 <label for="nota" class="form-label">nota</label>
