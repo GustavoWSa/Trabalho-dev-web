@@ -5,24 +5,12 @@
         <group>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/model/TurmaDAO.java</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/admin/Turmas/formTurma.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/professor/LogoutProfessor.java</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/nbproject/private/private.xml</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/comum/menu.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/filtro/filtroProfessor.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/aluno/LogoutAluno.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/aluno/PaginaInicial.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/AutenticaController.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/admin/TurmaC.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/aluno/AlunoController.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/professor/listaTurmas.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/aluno/listaNotas.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/professor/TurmaController.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/filtro/filtroAluno.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/build/web/views/professor/listaTurmas.jsp</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/comum/showMessage.jsp</file>
             <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/admin/Alunos/formRegistrarAluno.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/aluno/TurmaAluno.java</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/professor/formTurma.jsp</file>
-            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/web/views/aluno/InscricaoTurma.jsp</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/admin/LogoutController.java</file>
+            <file>file:/C:/Users/gusta/OneDrive/Documentos/TrabalhoDevWeb/src/java/controller/AutenticaController.java</file>
         </group>
     </open-files>
 </project-private>
