@@ -25,7 +25,7 @@ public class TurmaController extends HttpServlet {
         System.out.println("Dentro de TurmaController doGet: " + acao);
 
         if (acao == null) {
-            acao = "Listar";
+            acao = "ListarTurmasProfessor";
         }
 
         switch (acao) {
@@ -40,7 +40,7 @@ public class TurmaController extends HttpServlet {
                 break;
 
             case "ListarTurmasProfessor":
-                HttpSession session = request.getSession(false); // Retrieve existing session only once
+                HttpSession session = request.getSession(false); 
                 if (session != null) {
                     Professor professorLogado = (Professor) session.getAttribute("authUserProfessor");
                     if (professorLogado != null) {

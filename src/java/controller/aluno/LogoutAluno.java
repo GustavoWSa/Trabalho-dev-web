@@ -9,11 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Leonardo
- */
-@WebServlet(name = "logOut Aluno", urlPatterns = {"/aluno/logOut Aluno"})
+
+@WebServlet(name = "LogoutAluno", urlPatterns = {"/aluno/LogoutAluno"})
 public class LogoutAluno extends HttpServlet {
 
     @Override

@@ -54,8 +54,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-2">
-                    <input type="submit" name="btEnviar" value="<%=acao%>" class="btn btn-primary">
-                    <a href="/aplicacaoMVC/admin/ProfessorController?acao=Listar" class="btn btn-danger">Retornar</a>
+                    <input type="submit" name="btEnviar" value="Registrar" class="btn btn-primary">
                 </div>
             </div>
         </form>

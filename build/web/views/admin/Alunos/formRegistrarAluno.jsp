@@ -35,7 +35,7 @@
                         <%= msgError%>
                     </div>
                     <% }%>
-        <form action="/aplicacaoMVC/admin/RegistrarAluno" method="POST">
+        <form action="RegistrarAluno" method="POST">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome</label>
                 <input type="text" name="nome" class="form-control" required>
@@ -72,9 +72,10 @@
                 <label for="cep" class="form-label">CEP</label>
                 <input type="text" name="cep" class="form-control">
             </div>
-            <div>
-                <input type="submit" name="btEnviar" value="<%=acao%>" class="btn btn-primary">
-                <a href="/aplicacaoMVC/admin/RegistrarAluno?acao=Listar" class="btn btn-danger">Retornar</a>
+            <div class="row">
+                <div class="col-sm-2">
+                    <input type="submit" value="Registrar" class="btn btn-primary">
+                </div>
             </div>
         </form>
     </div>

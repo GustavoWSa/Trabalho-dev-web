@@ -24,6 +24,7 @@ public class filtroProfessor implements Filter {
         HttpSession session = ((HttpServletRequest) request).getSession(false);
         if (session != null) {
             System.out.println("Session ID: " + session.getId());
+            System.out.println("No filtro de professor");
             Professor professor = (Professor) session.getAttribute("authUserProfessor");
             if (professor != null && !((String) professor.getNome()).isEmpty()) {
                 chain.doFilter(request, response);

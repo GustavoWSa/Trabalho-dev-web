@@ -11,10 +11,10 @@
 </head>
 <body>
     <div class="container">
-         <jsp:include page="../../comum/menu.jsp" />
-            <div class="row mt-5">
-                <div class="col-sm-4 offset-3">
-                    <%
+    <jsp:include page="../comum/menu.jsp" />
+        <div class="row mt-5">
+            <div class="col-sm-4 offset-3">
+                <%
                         Turma turma = (Turma) request.getAttribute("turma");
                         String acao = (String) request.getAttribute("acao");
                         switch (acao) {
@@ -54,7 +54,7 @@
             </div>
             <div class="mb-3">
                 <label for="nota" class="form-label">nota</label>
-                <input type="double" name="nota" class="form-control" required>
+                <input type="number" step="0.01" name="nota" class="form-control" required>
             </div>
             <div class="row">
                 <div class="col-sm-2">
@@ -63,5 +63,6 @@
             </div>
         </form>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

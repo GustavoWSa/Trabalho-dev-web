@@ -1,4 +1,4 @@
-package controller;
+ package controller;
 
 import entidade.Administrador;
 import entidade.Professor;

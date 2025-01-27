@@ -15,9 +15,7 @@
                         Professor professorLogado = (Professor) session.getAttribute("authUserProfessor");
                         Aluno alunoLogado = (Aluno) session.getAttribute("authUserAluno");
                         
-                        if (administradorLogado != null) { %>
-                            
-                            
+                        if (administradorLogado != null) { %>  
                             <a class="nav-link" href="/aplicacaoMVC/admin/dashboard">Dashboard</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/CategoriaController?acao=Listar">Categorias</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/DisciplinaController?acao=Listar">Disciplinas</a>
@@ -26,13 +24,13 @@
                             <a class="nav-link" href="/aplicacaoMVC/admin/ProfessorController">Professores</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/logOut">Logout</a>
                 <%  } else if (professorLogado != null) { %>
-                            
-                            <a class="nav-link" href="/aplicacaoMVC/professor/TurmaController?acao=ListarTurmasProfessor">Lancar nota</a>
+                           
+                            <a class="nav-link" href="/aplicacaoMVC/professor/TurmaController?acao=ListarTurmasProfessor">Lançar nota</a>
                             <a class="nav-link" href="/aplicacaoMVC/professor/LogoutProfessor">Logout</a>
                 <%  } else if (alunoLogado != null) { %>
-                            <a class="nav-link" href="/aplicacaoMVC/aluno/TurmaAluno?acao=ListarTurmasAluno">Ver notas</a>
-                            <a class="nav-link" href="/aplicacaoMVC/aluno/TurmaAluno?acao=ListarAbertas">Inscricao em turmas</a>
-                            <a class="nav-link" href="/aplicacaoMVC/aluno/logOutAluno">Logout</a>
+                            <a class="nav-link" href="/aplicacaoMVC/aluno/TurmaAluno?acao=ListarTurmasAluno">Histórico</a>
+                            <a class="nav-link" href="/aplicacaoMVC/aluno/TurmaAluno?acao=ListarAbertas">Inscrição em disciplinas</a>
+                            <a class="nav-link" href="/aplicacaoMVC/aluno/LogoutAluno">Logout</a>
                 <%  } else { %>
                             <!-- Opções para usuário não autenticado -->
                             <a class="nav-link" href="/aplicacaoMVC/MostrarComentarios">Comentários</a>
